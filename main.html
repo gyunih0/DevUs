@@ -12,13 +12,14 @@
   <script  src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
   <script  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
   <script  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollToPlugin.min.js" integrity="sha512-nTHzMQK7lwWt8nL4KF6DhwLHluv6dVq/hNnj2PBN0xMl2KaMm1PM02csx57mmToPAodHmPsipoERRNn4pG7f+Q==" crossorigin="anonymous"></script>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
   <title>DevUs</title>
 </head>
 <body>
   <div class="hd">
     <div class="title">
       <p>Dev</p><p class="us">Us</p>
-      <h1>같이 하고싶은 개발자</h1>
+      <h2>같이 하고싶은 개발자</h2>
     </div>
     <ul>
       <li><button>프로젝트 생성</button></li>
@@ -40,10 +41,47 @@
       <!-- 페이징 -->
       <div class="swiper-pagination"></div>
     </div>
+    <h1>All</h1>
+    <ul>
+      <li>
+        <div class="all">
+          <img src="./image/all.png" alt="">
+          <p>Front-end</p>
+          <h3>000님의 프로젝트</h3>
+          <i class="fi fi-sr-heart"></i>
+        </div>
+      </li>
+      <li>
+        <div class="all">
+          <img src="./image/all.png" alt="">
+          <p>Front-end</p>
+          <h3>000님의 프로젝트</h3>
+          <i class="fi fi-sr-heart"></i>
+        </div>
+      </li>
+      <li>
+        <div class="all">
+          <img src="./image/all.png" alt="">
+          <p>Front-end</p>
+          <h3>000님의 프로젝트</h3>
+          <i class="fi fi-sr-heart"></i>
+        </div>
+      </li>
+      <li>
+        <div class="all">
+          <img src="./image/all.png" alt="">
+          <p>Front-end</p>
+          <h3>000님의 프로젝트</h3>
+          <i class="fi fi-sr-heart"></i>
+          
+        </div>
+      </li>
+    </ul>
+    <div id = "to-top">
+      <div class="material-icons"> arrow_upward</div>
+    </div>
   </div>
-  <div id = "to-top">
-    <div class="material-icons"> arrow_upward</div>
-  </div>
+  
   <script>
   new Swiper('.swiper1', {
     pagination : { // 페이징 설정

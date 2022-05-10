@@ -157,17 +157,23 @@ border:1px solid #558ab7 !important;
   margin-left: 15px;
   margin-bottom: 20px;
 }
+.bd ul li .all .ct {
+  
+  display: flex;
+  
+}
 .bd ul li .all .ct .hart {
   width: 18px;
   height: 15.75px;
   margin-left: 15px;
-  color: #E0A2F5;
-}
-.bd ul li .all .ct {
   
-  display: flex;
-  height: 16px;
 }
+.bd ul li .all .ct p {
+  margin-top: 1px;
+  margin-left: 5px;
+  font-size: 15px;
+}
+
 .bd ul li .all p{
  
 }
@@ -228,7 +234,9 @@ border:1px solid #558ab7 !important;
   color: #E0A2F5;
 }
 .bd ul li .all-1 .ct p {
-
+  margin-top: 1px;
+  margin-left: 5px;
+  font-size: 15px;
 }
 
  #to-top {

@@ -12,7 +12,7 @@ import certifi
 SECRET_KEY = 'DEVUS'
 
 ca = certifi.where()
-client = MongoClient('mongodb+srv://test:sparta@cluster0.dg4uu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', tlsCAFile=ca)
+client = MongoClient('mongodb+srv://test:sparta@cluster0.7y6m3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.devus
 
 

@@ -59,7 +59,7 @@ border:1px solid #558ab7 !important;
 .hd .title h2{
   font-size: 12px;
   font-family: 'Antonio', sans-serif;
-  font-weight: 400;
+  font-weight: 400px;
   font-style: normal;
   display: flex;
   position: absolute;
@@ -74,7 +74,7 @@ border:1px solid #558ab7 !important;
   font-size: 40px;
   display: flex;
   font-family: 'Antonio', sans-serif;
-  font-weight: 400;
+  font-weight: 400px;
   font-style: normal;
   font-size: 40px;
   line-height: 83px;
@@ -84,10 +84,10 @@ border:1px solid #558ab7 !important;
   font-size: 40px;
 }
 .swiper-button-prev {
-  background-image: url("image/leftbut.png");
+  background-image: url("./image/leftbut.png");
 }
 .swiper-button-next {
-  background-image: url("image/rightbut.png");
+  background-image: url("./image/rightbut.png");
 }
 .hd ul {
   display: flex;
@@ -168,7 +168,17 @@ border:1px solid #558ab7 !important;
   font-size: 24px;
   margin-top: 100px;
   margin-bottom: 30px;
+  cursor: pointer;
 
+}
+.bd .sec a {
+  margin-right: 20px;
+}
+.bd .sec > .fe:hover,
+.bd .sec > .ba:hover,
+.bd .sec > .fu:hover
+ {
+  text-decoration: underline;
 }
 .bd .sec h3 {
   margin-right: 30px;
@@ -257,13 +267,13 @@ border:1px solid #558ab7 !important;
   position: absolute;
   top: 15px;
   font-size: 20px;
-  
+
 }
 .modal-content .create .box {
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  
+
 }
 .modal-content .create .box .name > p{
   font-size: 20px;
@@ -303,6 +313,10 @@ border:1px solid #558ab7 !important;
   border-radius: 8px;
   color: #fff;
 }
+.modal-content .create .box .pr > button:hover {
+  background-color: #E0A2F5;
+  border: 1px solid #000;
+}
 .modal-content .create .box .dev {
   position: absolute;
   top: 306px;
@@ -316,12 +330,16 @@ border:1px solid #558ab7 !important;
   border-radius: 8px;
   color: #fff;
 }
+.modal-content .create .box .dev >button:hover {
+  background-color: #E0A2F5;
+  border: 1px solid #000;
+}
 .modal-content .create .box .content > p{
   position: absolute;
   top: 380px;
   font-size: 20px;
 }
-.modal-content .create .box .content > input {
+.modal-content .create .box .content > textarea {
   position: absolute;
   top: 417px;
   width: 400px;
@@ -338,6 +356,11 @@ border:1px solid #558ab7 !important;
   border: 1px solid #E0A2F5;
   border-radius: 8px;
   color: #fff;
+
+}
+.modal-content .create .box > button:hover {
+  background-color: #E0A2F5;
+  border: 1px solid #000;
 }
 .close {
   color: #fff;
@@ -351,7 +374,7 @@ border:1px solid #558ab7 !important;
   color: rgb(180, 11, 11);
   text-decoration: none;
   cursor: pointer;
-  
+
 }
 button#myBtn{
   width: 80px;
@@ -363,9 +386,3 @@ button#myBtn{
   color: #fff;
   cursor: pointer;
 }
-
-
-
-
-
-

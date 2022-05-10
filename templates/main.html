@@ -68,9 +68,9 @@
         {% endfor %}
     </ul>
     <div class="sec">
-        <a href="javascript:void(0);" style="margin-right: 15px; font-weight: bold" onclick="category('Front-end')">Front-end</a>
-        <a href="javascript:void(0);" style="margin-right: 15px; font-weight: bold" onclick="category('Back-end')">Back-end</a>
-        <a href="javascript:void(0);" style="margin-right: 15px; font-weight: bold" onclick="category('Full Stack')">Full Stack</a>
+      <a href="javascript:void(0);" onclick="category('Front-end')" class="fe">Front-end</a>
+      <a href="javascript:void(0);" onclick="category('Back-end')" class="ba">Back-end</a>
+      <a href="javascript:void(0);" onclick="category('Full Stack')" class="fu">Full Stack</a>
     </div>
     <ul class="category">
         {% for card in fe_cards %}

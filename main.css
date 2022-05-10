@@ -140,7 +140,7 @@ border:1px solid #558ab7 !important;
   width: 280px;
   height: 290px;
 }
-.bd ul li .all img {
+.bd ul li .all a img {
   width: 280px;
   height: 150px;
   border-radius: 15px 15px 0px 0px;

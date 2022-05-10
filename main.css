@@ -68,7 +68,7 @@ border:1px solid #558ab7 !important;
   color: #8E8E8E;
   font-family: 'Noto Sans';
 }
-.hd .title p {
+.hd .title a {
   align-items: center;
   text-align: center;
   font-size: 40px;
@@ -157,11 +157,19 @@ border:1px solid #558ab7 !important;
   margin-left: 15px;
   margin-bottom: 20px;
 }
-.bd ul li .all i {
+.bd ul li .all .ct .hart {
   width: 18px;
   height: 15.75px;
   margin-left: 15px;
   color: #E0A2F5;
+}
+.bd ul li .all .ct {
+  
+  display: flex;
+  height: 16px;
+}
+.bd ul li .all p{
+ 
 }
 .bd .sec {
   display: flex;
@@ -210,11 +218,17 @@ border:1px solid #558ab7 !important;
   margin-left: 15px;
   margin-bottom: 20px;
 }
-.bd ul li .all-1 i {
+.bd ul li .all-1 .ct {
+  display: flex;
+}
+.bd ul li .all-1 .ct .hart {
   width: 18px;
   height: 15.75px;
   margin-left: 15px;
   color: #E0A2F5;
+}
+.bd ul li .all-1 .ct p {
+
 }
 
  #to-top {

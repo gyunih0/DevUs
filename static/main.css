@@ -68,7 +68,7 @@ border:1px solid #558ab7 !important;
   color: #8E8E8E;
   font-family: 'Noto Sans';
 }
-.hd .title p {
+.hd .title a {
   align-items: center;
   text-align: center;
   font-size: 40px;
@@ -157,19 +157,33 @@ border:1px solid #558ab7 !important;
   margin-left: 15px;
   margin-bottom: 20px;
 }
-.bd ul li .all i {
+.bd ul li .all .ct {
+  
+  display: flex;
+  
+}
+.bd ul li .all .ct .hart {
   width: 18px;
   height: 15.75px;
   margin-left: 15px;
-  color: #E0A2F5;
+  
+}
+.bd ul li .all .ct p {
+  margin-top: 1px;
+  margin-left: 5px;
+  font-size: 15px;
+}
+
+.bd ul li .all p{
+ 
 }
 .bd .sec {
   display: flex;
   font-size: 24px;
   margin-top: 100px;
   margin-bottom: 30px;
-
   cursor: pointer;
+  
 }
 .bd .sec a {
   margin-right: 20px;
@@ -211,11 +225,19 @@ border:1px solid #558ab7 !important;
   margin-left: 15px;
   margin-bottom: 20px;
 }
-.bd ul li .all-1 i {
+.bd ul li .all-1 .ct {
+  display: flex;
+}
+.bd ul li .all-1 .ct .hart {
   width: 18px;
   height: 15.75px;
   margin-left: 15px;
   color: #E0A2F5;
+}
+.bd ul li .all-1 .ct p {
+  margin-top: 1px;
+  margin-left: 5px;
+  font-size: 15px;
 }
 
  #to-top {
@@ -357,7 +379,6 @@ border:1px solid #558ab7 !important;
   border: 1px solid #E0A2F5;
   border-radius: 8px;
   color: #fff;
-
 }
 .modal-content .create .box > button:hover {
   background-color: #E0A2F5;

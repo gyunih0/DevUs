@@ -18,7 +18,17 @@ db = client.devus
 
 @app.route('/')
 def main():
-    return render_template("main.html")
+    all_cards = list(db.project.find({}, {'_id': False}))
+    fe_cards = list(db.project.find({'tech': 'Front-end'}, {'_id': False}))
+    return render_template("main.html", all_cards=all_cards, fe_cards=fe_cards)
+
+
+@app.route('/category')
+def category():
+    tech_receive = request.args['tech_give']
+    tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))
+    print(tech_cards)
+    return jsonify({'cards_category': tech_cards})
 
 '''
 로그인 후 메인

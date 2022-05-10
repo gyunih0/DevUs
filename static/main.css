@@ -168,8 +168,8 @@ border:1px solid #558ab7 !important;
   font-size: 24px;
   margin-top: 100px;
   margin-bottom: 30px;
-  cursor: pointer;
 
+  cursor: pointer;
 }
 .bd .sec a {
   margin-right: 20px;
@@ -180,6 +180,7 @@ border:1px solid #558ab7 !important;
  {
   text-decoration: underline;
 }
+
 .bd .sec h3 {
   margin-right: 30px;
 }
@@ -374,7 +375,6 @@ border:1px solid #558ab7 !important;
   color: rgb(180, 11, 11);
   text-decoration: none;
   cursor: pointer;
-
 }
 button#myBtn{
   width: 80px;

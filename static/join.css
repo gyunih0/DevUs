@@ -60,7 +60,7 @@ body {
   position: absolute;
   top:100px ;
   width: 400px;
-  height: 600px;
+  height: 650px;
   background: #FFFFFF;
   border: 1px solid #DBDBDB;
 }
@@ -83,15 +83,20 @@ body {
   position: absolute;
   top: 152px;
   left: 65px;
+  display: flex;
+  flex-direction: column;
 
 }
 .bd .join-box ul li {
   margin-bottom: 12px;
 }
+.bd .join-box ul li p{
+  font-size: 5px;
+}
 #id,
 #name,
-#pw,
-#pw1
+#pw1,
+#pw2
  {
   width: 270px;
   height: 50px;
@@ -106,7 +111,7 @@ body {
 
 .bd .join-box .bt{
   position: absolute;
-  top: 427px;
+  top: 480px;
   left: 65px;
   width: 270px;
   height: 41px;
@@ -124,7 +129,7 @@ body {
 .bd .join-box hr {
   position: absolute;
   border: 1px solid #DBDBDB;
-  top:513px;
+  top:550px;
   left: 65px;
   width: 270px;
   display: block;
@@ -132,7 +137,7 @@ body {
 .bd .join-box .lg {
   display: flex;
   position: absolute;
-  top: 551px;
+  top: 580px;
   left: 113px;
   font-family: Noto Sans;
   font-size: 14px;

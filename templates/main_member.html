@@ -14,17 +14,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
   <title>DevUs</title>
+
+  <script>
+    function logout() {
+      $.removeCookie('mytoken', {path: '/'});
+      window.location.href = '/';
+    }
+  </script>
+
 </head>
 <body>
   <div class="hd">
     <div class="title">
       <p>Dev</p><p class="us">Us</p>
-      <h1>같이 하고싶은 개발자</h1>
+      <h1>로그인중</h1>
     </div>
     <ul>
       <li><button>프로젝트 생성</button></li>
-      <li><button onclick="location.href='login'">로그인</button></li>
+      <li><button onclick="logout()">로그아웃</button></li>
     </ul>
   </div>
   <div class="bd">

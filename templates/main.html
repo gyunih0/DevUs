@@ -1,214 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="../static/main.css">
-  <link href="https://fonts.googleapis.com/css2?family=Antonio&family=Jua&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <script  src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-  <script  src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
-  <script  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
-  <script  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollToPlugin.min.js" integrity="sha512-nTHzMQK7lwWt8nL4KF6DhwLHluv6dVq/hNnj2PBN0xMl2KaMm1PM02csx57mmToPAodHmPsipoERRNn4pG7f+Q==" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Antonio&family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
+            integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollToPlugin.min.js"
+            integrity="sha512-nTHzMQK7lwWt8nL4KF6DhwLHluv6dVq/hNnj2PBN0xMl2KaMm1PM02csx57mmToPAodHmPsipoERRNn4pG7f+Q=="
+            crossorigin="anonymous"></script>
 
-  <title>DevUs</title>
+    <title>DevUs</title>
 </head>
 <body>
-  <div class="hd">
+<div class="hd">
     <div class="title">
-      <p>Dev</p><p class="us">Us</p>
-      <h2>같이 하고싶은 개발자</h2>
+        <p>Dev</p>
+        <p class="us">Us</p>
+        <h2>같이 하고싶은 개발자</h2>
     </div>
     <ul>
-      <li><button id="myBtn">프로젝트 생성</button></li>
-      <li><button onclick="location.href='login.html'">로그인</button></li>
+        <li>
+            <button id="myBtn">프로젝트 생성</button>
+        </li>
+        <li>
+            <button onclick="location.href='login.html'">로그인</button>
+        </li>
     </ul>
-  </div>
-  <div class="bd">
+</div>
+<div class="bd">
     <div class="swiper-container swiper1">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="../static/image/banner.png"></div>
-        <div class="swiper-slide"><img src="../static/image/banner.png"></div>
-        <div class="swiper-slide"><img src="../static/image/banner.png"></div>
-      </div>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="../static/image/banner.png"></div>
+            <div class="swiper-slide"><img src="../static/image/banner.png"></div>
+            <div class="swiper-slide"><img src="../static/image/banner.png"></div>
+        </div>
 
-      <!-- 네비게이션 버튼 -->
-      <div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-      <div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+        <!-- 네비게이션 버튼 -->
+        <div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+        <div class="swiper-button-prev"></div><!-- 이전 버튼 -->
 
-      <!-- 페이징 -->
-      <div class="swiper-pagination"></div>
+        <!-- 페이징 -->
+        <div class="swiper-pagination"></div>
     </div>
     <h1>All</h1>
     <ul>
-      <li>
-        <div class="all">
-          <img src="../static/image/all.png" alt="">
-          <p>Front-end</p>
-          <h3>000님의 프로젝트</h3>
-          <i class="fi fi-sr-heart"></i>
-        </div>
-      </li>
-      <li>
-        <div class="all">
-          <img src="../static/image/all.png" alt="">
-          <p>Front-end</p>
-          <h3>000님의 프로젝트</h3>
-          <i class="fi fi-sr-heart"></i>
-        </div>
-      </li>
-      <li>
-        <div class="all">
-          <img src="../static/image/all.png" alt="">
-          <p>Front-end</p>
-          <h3>000님의 프로젝트</h3>
-          <i class="fi fi-sr-heart"></i>
-        </div>
-      </li>
-      <li>
-        <div class="all">
-          <img src="../static/image/all.png" alt="">
-          <p>Front-end</p>
-          <h3>000님의 프로젝트</h3>
-          <i class="fi fi-sr-heart"></i>
+        {% for card in cards %}
+            {% set project_img = card["project_img"] %}
+            {% set tech = card["tech"] %}
+            {% set user_name = card["user_name"] %}
+            <li>
+                <div class="all">
+                    <img src="{{ project_img }}" alt="">
+                    <p>{{ tech }}</p>
+                    <h3>{{ user_name }}님의 프로젝트</h3>
+                    <i class="fi fi-sr-heart"></i>
+                </div>
+            </li>
 
-        </div>
-      </li>
+        {% endfor %}
     </ul>
     <div class="sec">
-      <h3>Front-end</h3>
-      <h3>Back-end</h3>
-      <h3>Full Stack</h3>
+        <h3>Front-end</h3>
+        <h3>Back-end</h3>
+        <h3>Full Stack</h3>
     </div>
     <ul>
-      <li>
-        <div class="all-1">
-          <img src="../static/image/all.png" alt="">
-          <p>Front-end</p>
-          <h3>000님의 프로젝트</h3>
-          <i class="fi fi-sr-heart"></i>
-        </div>
-      </li>
-      <li>
-        <div class="all-1">
-          <img src="../static/image/all.png" alt="">
-          <p>Front-end</p>
-          <h3>000님의 프로젝트</h3>
-          <i class="fi fi-sr-heart"></i>
-        </div>
-      </li>
-      <li>
-        <div class="all-1">
-          <img src="../static/image/all.png" alt="">
-          <p>Front-end</p>
-          <h3>000님의 프로젝트</h3>
-          <i class="fi fi-sr-heart"></i>
-        </div>
-      </li>
-      <li>
-        <div class="all">
-          <img src="../static/image/all.png" alt="">
-          <p>Front-end</p>
-          <h3>000님의 프로젝트</h3>
-          <i class="fi fi-sr-heart"></i>
-
-        </div>
-      </li>
+        <li>
+            <div class="all-1">
+                <img src="../static/image/all.png" alt="">
+                <p>Front-end</p>
+                <h3>000님의 프로젝트</h3>
+                <i class="fi fi-sr-heart"></i>
+            </div>
+        </li>
     </ul>
 
-    <div id = "to-top">
-      <div class="material-icons"> arrow_upward</div>
+    <div id="to-top">
+        <div class="material-icons"> arrow_upward</div>
     </div>
-  </div>
-  <div id="myModal" class="modal">
+</div>
+<div id="myModal" class="modal">
 
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <div class="create">
-        <h1>프로젝트 생성하기</h1>
-        <div class="name">
-          <p>이름</p>
-          <input type="text">
-        </div>
-        <div class="pr">
-          <p>프로젝트 이미지</p>
-          <input type="text"><button>파일선택</button>
-        </div>
-        <div class="dev">
-          <button>Front-end</button>
-          <button>Back-end</button>
-          <button>Full-stack</button>
-        </div>
-        <div class="content">
-          <p>상세설명</p>
-          <input type="text">
-        </div>
+        <span class="close">&times;</span>
+        <div class="create">
+            <h1>프로젝트 생성하기</h1>
+            <div class="name">
+                <p>이름</p>
+                <input type="text">
+            </div>
+            <div class="pr">
+                <p>프로젝트 이미지</p>
+                <input type="text">
+                <button>파일선택</button>
+            </div>
+            <div class="dev">
+                <button>Front-end</button>
+                <button>Back-end</button>
+                <button>Full-stack</button>
+            </div>
+            <div class="content">
+                <p>상세설명</p>
+                <input type="text">
+            </div>
 
-        <button>저장</button>
-      </div>
+            <button>저장</button>
+        </div>
     </div>
 
-  </div>
-  <script>
-  new Swiper('.swiper1', {
-    pagination : { // 페이징 설정
-      el : '.swiper-pagination',
-      clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
-    },
-    navigation : { // 네비게이션 설정
-      nextEl : '.swiper-button-next', // 다음 버튼 클래스명
-      prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
-    },
-  });
+</div>
+<script>
+    new Swiper('.swiper1', {
+        pagination: { // 페이징 설정
+            el: '.swiper-pagination',
+            clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+        },
+        navigation: { // 네비게이션 설정
+            nextEl: '.swiper-button-next', // 다음 버튼 클래스명
+            prevEl: '.swiper-button-prev', // 이번 버튼 클래스명
+        },
+    });
 
 
-  const toTopEl = document.querySelector('#to-top')
+    const toTopEl = document.querySelector('#to-top')
 
 
-  // 상단으로 스크롤 버튼을 클릭하면,
-  toTopEl.addEventListener('click', function () {
-    // 페이지 위치를 최상단으로 부드럽게(0.7초 동안) 이동.
-    gsap.to(window, .7, {
-      scrollTo: 0
+    // 상단으로 스크롤 버튼을 클릭하면,
+    toTopEl.addEventListener('click', function () {
+        // 페이지 위치를 최상단으로 부드럽게(0.7초 동안) 이동.
+        gsap.to(window, .7, {
+            scrollTo: 0
+        })
     })
-  })
 
 
-  /**
-   * 순서대로 나타나는 기능
-   */
-  // 나타날 요소들(.fade-in) 찾기.
-  const fadeEls = document.querySelectorAll('.visual .fade-in')
-  // 나타날 요소들을 하나씩 반복해서 처리!
-  fadeEls.forEach(function (fadeEl, index) {
-    // 각 요소들을 순서대로(delay) 보여지게 함!
-    gsap.to(fadeEl, 1, {
-      delay: (index + 1) * .7,
-      opacity: 1
+    /**
+     * 순서대로 나타나는 기능
+     */
+        // 나타날 요소들(.fade-in) 찾기.
+    const fadeEls = document.querySelectorAll('.visual .fade-in')
+    // 나타날 요소들을 하나씩 반복해서 처리!
+    fadeEls.forEach(function (fadeEl, index) {
+        // 각 요소들을 순서대로(delay) 보여지게 함!
+        gsap.to(fadeEl, 1, {
+            delay: (index + 1) * .7,
+            opacity: 1
+        })
     })
-  })
 
-   // modal
-   var modal = document.getElementById('myModal');
+    // modal
+    var modal = document.getElementById('myModal');
 
-  // modal button
-  var btn = document.getElementById("myBtn");
+    // modal button
+    var btn = document.getElementById("myBtn");
 
-  //<span> closes modal button
-  var span = document.getElementsByClassName("close")[0];
+    //<span> closes modal button
+    var span = document.getElementsByClassName("close")[0];
 
-  // btn을 클릭하면 모달 보임(열림)
-  btn.onclick = function() {
-      modal.style.display = "block";
-  }
+    // btn을 클릭하면 모달 보임(열림)
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
 
-  // <span> (x) 를 클릭하면 보이지않음(닫힘)
-  span.onclick = function() {
-      modal.style.display = "none";
-  }
-  </script>
+    // <span> (x) 를 클릭하면 보이지않음(닫힘)
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+</script>
 </body>
 
 </html>

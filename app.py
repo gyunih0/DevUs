@@ -9,13 +9,13 @@ from pymongo import MongoClient
 import certifi
 
 ca = certifi.where()
-client = MongoClient('mongodb+srv://test:sparta@cluster0.7y6m3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', tlsCAFile=ca)
+client = MongoClient('mongodb+srv://test:sparta@cluster0.dg4uu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.devus
 
 @app.route('/')
 def main():
-
-    return render_template("main.html")
+    cards = list(db.project.find({}, {'_id': False}))
+    return render_template("main.html", cards=cards)
 
 
 @app.route('/login')

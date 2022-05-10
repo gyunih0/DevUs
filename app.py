@@ -14,6 +14,7 @@ db = client.devus
 
 @app.route('/')
 def main():
+
     return render_template("main.html")
 
 

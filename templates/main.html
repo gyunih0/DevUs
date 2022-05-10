@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Antonio&family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
@@ -52,7 +53,7 @@
     </div>
     <h1>All</h1>
     <ul>
-        {% for card in cards %}
+        {% for card in all_cards %}
             {% set project_img = card["project_img"] %}
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
@@ -64,23 +65,27 @@
                     <i class="fi fi-sr-heart"></i>
                 </div>
             </li>
-
         {% endfor %}
     </ul>
     <div class="sec">
-        <a href="#" style="margin-right: 15px" onclick="category('Front-end')">Front-end</a>
-        <a href="#" style="margin-right: 15px" onclick="category('Back-end')">Back-end</a>
-        <a href="#" style="margin-right: 15px" onclick="category('Full Stack')">Full Stack</a>
+        <a href="javascript:void(0);" style="margin-right: 15px; font-weight: bold" onclick="category('Front-end')">Front-end</a>
+        <a href="javascript:void(0);" style="margin-right: 15px; font-weight: bold" onclick="category('Back-end')">Back-end</a>
+        <a href="javascript:void(0);" style="margin-right: 15px; font-weight: bold" onclick="category('Full Stack')">Full Stack</a>
     </div>
-    <ul>
-        <li>
-            <div class="all-1">
-                <img src="../static/image/all.png" alt="">
-                <p>Front-end</p>
-                <h3>000님의 프로젝트</h3>
-                <i class="fi fi-sr-heart"></i>
-            </div>
-        </li>
+    <ul class="category">
+        {% for card in fe_cards %}
+            {% set project_img = card["project_img"] %}
+            {% set tech = card["tech"] %}
+            {% set user_name = card["user_name"] %}
+            <li>
+                <div class="all">
+                    <img src="{{ project_img }}" alt="">
+                    <p>{{ tech }}</p>
+                    <h3>{{ user_name }}님의 프로젝트</h3>
+                    <i class="fi fi-sr-heart"></i>
+                </div>
+            </li>
+        {% endfor %}
     </ul>
 
     <div id="to-top">
@@ -157,13 +162,33 @@
     })
 
     // category
+    // category click
     function category(tech_give) {
-        $.ajax({
+       $.ajax({
             type: "GET",
             url: "/category",
-            data: {"tech": tech_give},
+            data: {tech_give: tech_give},
             success: function(response) {
-                
+                $('.category').empty()
+                var rows = response['cards_category']
+
+                for (let i = 0; i < rows.length; i++) {
+                    var user_name = rows[i]['user_name']
+                    var project_img = rows[i]['project_img']
+                    var tech = rows[i]['tech']
+
+                    var temp_html = `<li>
+                                    <div class="all-1">
+                                        <img src="${project_img}" alt="">
+                                        <p>${tech}</p>
+                                        <h3>${user_name}님의 프로젝트</h3>
+                                        <i class="fi fi-sr-heart"></i>
+                                    </div>
+                                </li>`
+
+                    $('.category').append(temp_html);
+                }
+
             }
         });
     }

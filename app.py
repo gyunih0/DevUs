@@ -17,6 +17,10 @@ client = MongoClient('mongodb+srv://test:sparta@cluster0.7y6m3.mongodb.net/myFir
 db = client.devus
 
 
+'''
+메인페이지 API
+'''
+
 @app.route('/')
 def main():
     all_cards = list(db.project.find({}, {'_id': False}))
@@ -32,6 +36,13 @@ def category():
     return jsonify({'cards_category': tech_cards})
 
 
+@app.route('/project')
+def project_detail():
+    # num_receive = request.args['num_give']
+    num_receive = 1;
+    detail_cards = list(db.project.find({'num': num_receive}, {'_id': False}))
+
+    return render_template("detail.html", cards=detail_cards)
 
 '''
 로그인 후 메인

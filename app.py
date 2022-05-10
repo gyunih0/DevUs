@@ -12,6 +12,7 @@ ca = certifi.where()
 client = MongoClient('mongodb+srv://test:sparta@cluster0.dg4uu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.devus
 
+
 @app.route('/')
 def main():
     cards = list(db.project.find({}, {'_id': False}))

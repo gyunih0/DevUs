@@ -20,6 +20,9 @@ db = client.devus
 def main():
     return render_template("main.html")
 
+'''
+로그인 후 메인
+'''
 
 @app.route('/main')
 def main_member():
@@ -31,7 +34,7 @@ def main_member():
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
-        return redirect(url_for("main"))
+        return redirect(url_for("login", msg="로그인 정보가 없습니다."))
 
 
 '''

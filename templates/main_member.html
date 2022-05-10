@@ -17,6 +17,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollToPlugin.min.js"
             integrity="sha512-nTHzMQK7lwWt8nL4KF6DhwLHluv6dVq/hNnj2PBN0xMl2KaMm1PM02csx57mmToPAodHmPsipoERRNn4pG7f+Q=="
             crossorigin="anonymous"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
 
     <title>DevUs</title>
 
@@ -25,6 +27,40 @@
       $.removeCookie('mytoken', {path: '/'});
       window.location.href = '/';
     }
+
+        // category
+    // category click
+    function category(tech_give) {
+       $.ajax({
+            type: "GET",
+            url: "/category",
+            data: {tech_give: tech_give},
+            success: function(response) {
+                $('.category').empty()
+                var rows = response['cards_category']
+
+                for (let i = 0; i < rows.length; i++) {
+                    var user_name = rows[i]['user_name']
+                    var project_img = rows[i]['project_img']
+                    var tech = rows[i]['tech']
+
+                    var temp_html = `<li>
+                                    <div class="all-1">
+                                        <img src="${project_img}" alt="">
+                                        <p>${tech}</p>
+                                        <h3>${user_name}님의 프로젝트</h3>
+                                        <i class="fi fi-sr-heart"></i>
+                                    </div>
+                                </li>`
+
+                    $('.category').append(temp_html);
+                }
+
+            }
+        });
+    }
+
+
   </script>
 
 </head>
@@ -40,7 +76,7 @@
             <button id="myBtn">프로젝트 생성</button>
         </li>
         <li>
-            <button onclick="location.href='login'">로그아웃</button>
+            <button onclick="logout()">로그아웃</button>
         </li>
     </ul>
 </div>
@@ -59,9 +95,10 @@
         <!-- 페이징 -->
         <div class="swiper-pagination"></div>
     </div>
-    <h1>All</h1>
+    <h1>{{user_info['name']}}님이 관심있는 프로젝트</h1>
     <ul>
-        {% for card in all_cards %}
+
+        {% for like_card in like_cards %}
             {% set project_img = card["project_img"] %}
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}

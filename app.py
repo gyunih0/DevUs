@@ -3,6 +3,7 @@ import jwt
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 import requests
 from datetime import datetime, timedelta
+import gridfs
 
 app = Flask(__name__)
 
@@ -30,17 +31,30 @@ def category():
     print(tech_cards)
     return jsonify({'cards_category': tech_cards})
 
+
+
 '''
 로그인 후 메인
 '''
 
 @app.route('/main')
 def main_member():
+
     token_receive = request.cookies.get('mytoken')
+
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
-        return render_template('main_member.html', user_info=user_info)
+
+        all_cards = list(db.project.find({}, {'_id': False}))
+        like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))  # userid & like_list
+
+        like_cards = []
+        for like_num in like_nums:
+            like_card = db.project.find_one({'num': like_num}, {'_id': False})
+            like_cards.append(like_card)
+
+        return render_template('main_member.html', user_info=user_info, all_cards=all_cards, like_cards=like_cards)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:

@@ -7,6 +7,44 @@
   <link rel="stylesheet" href="./static/login.css">
   <link href="https://fonts.googleapis.com/css2?family=Antonio&family=Jua&display=swap" rel="stylesheet">
   <title>로그인</title>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+  <script>
+    function sign_in() {
+      let userid = $("#id").val()
+      let password = $("#pw").val()
+
+      if (userid == "") {
+        alert("아이디를 입력해주세요.")
+        return;
+      }
+
+      if (password == "") {
+        alert("비밀번호를 입력해주세요.")
+        return;
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "/login",
+        data: {
+          id_give: userid,
+          pw_give: password
+        },
+        success: function (response) {
+          if (response['result'] == 'success') {
+            $.cookie('mytoken', response['token'], {path: '/'});
+            window.location.replace("/")
+          } else {
+            alert(response['msg'])
+          }
+        }
+      });
+    }
+  </script>
 </head>
 <body>
   <div class="bd">
@@ -16,7 +54,7 @@
       </div>
       <input type="text" name="" id="id" placeholder="아이디">
       <input type="text" name="" id="pw" placeholder="비밀번호">
-      <button class="bt">로그인</button>
+      <button onclick="sign_in()" class="bt">로그인</button>
       <hr>
       <div class="join">
         <p>계정이 없으신가요?</p>

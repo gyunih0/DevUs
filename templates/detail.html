@@ -35,21 +35,24 @@
 
 </div>
 <div class="sec">
-    <h3>Front-end</h3>
-    <h2>000님의 프로젝트</h2>
+    <h3>{{ cards["tech"] }}</h3>
+    <h2>{{ cards["user_name"] }}님의 프로젝트</h2>
     <div class="user">
         <img src="../static/image/user.jpeg" alt="">
-        <p>000님</p>
+        <p>{{ cards["user_name"] }}</p>
         <img src="../static/image/hart.png" alt="">
-        <p>20</p>
+        <p>{{ cards["like"] }}</p>
     </div>
     <hr>
-    <h1>상세내용 보여주기</h1>
+    <div class="dec-box">
+        <h1>{{ cards["description"] }}</h1>
+    </div>
 </div>
 <script>
     $(document).ready(function () {
 
     })
+
 </script>
 </body>
 </html>

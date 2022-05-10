@@ -40,7 +40,7 @@ def category():
 def project_detail():
     # num_receive = request.args['num_give']
     num_receive = 1;
-    detail_cards = list(db.project.find({'num': num_receive}, {'_id': False}))
+    detail_cards = db.project.find_one({'num': num_receive}, {'_id': False})
 
     return render_template("detail.html", cards=detail_cards)
 

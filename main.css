@@ -303,6 +303,10 @@ border:1px solid #558ab7 !important;
   border-radius: 8px;
   color: #fff;
 }
+.modal-content .create .box .pr > button:hover {
+  background-color: #E0A2F5;
+  border: 1px solid #000;
+}
 .modal-content .create .box .dev {
   position: absolute;
   top: 306px;
@@ -316,12 +320,16 @@ border:1px solid #558ab7 !important;
   border-radius: 8px;
   color: #fff;
 }
+.modal-content .create .box .dev >button:hover {
+  background-color: #E0A2F5;
+  border: 1px solid #000;
+}
 .modal-content .create .box .content > p{
   position: absolute;
   top: 380px;
   font-size: 20px;
 }
-.modal-content .create .box .content > input {
+.modal-content .create .box .content > textarea {
   position: absolute;
   top: 417px;
   width: 400px;
@@ -338,6 +346,11 @@ border:1px solid #558ab7 !important;
   border: 1px solid #E0A2F5;
   border-radius: 8px;
   color: #fff;
+  
+}
+.modal-content .create .box > button:hover {
+  background-color: #E0A2F5;
+  border: 1px solid #000;
 }
 .close {
   color: #fff;

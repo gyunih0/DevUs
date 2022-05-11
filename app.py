@@ -87,7 +87,7 @@ def project_post():
 
     db.project.insert_one(doc)  #db 추가
 
-    return jsonify({'result': 'success'})
+    return render_template('main.html')
 
 '''
 회원 가입 API

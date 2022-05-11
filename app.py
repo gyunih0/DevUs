@@ -114,10 +114,6 @@ def main_category():
 
 @app.route("/main", methods=["POST"])
 def project_post():
-    token_receive = request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    user_info = db.user.find_one({"id": payload['id']})
-
     user_name_receive = request.form.get('user_name', False)  # 폼에서 전송하는 데이터 받는 형식
     tech_receive = request.form.get('tech', False)
     description_receive = request.form.get('description', False)
@@ -146,7 +142,7 @@ def project_post():
     print(doc['project_img'])
     db.project.insert_one(doc)  # db 추가
 
-    return redirect(url_for("main"))
+    return redirect(url_for("main_member"))
 
 
 '''

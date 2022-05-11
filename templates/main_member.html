@@ -23,12 +23,45 @@
     <title>DevUs</title>
 
   <script>
+
     function logout() {
       $.removeCookie('mytoken', {path: '/'});
       window.location.href = '/';
     }
 
-        // category
+    function like_up() {
+        let num
+        let like
+        $.ajax({
+            type: "POST",
+            url: "/like",
+            data: {id_give: {{user_info['id']}}, num_give: num, like_give: like},
+            success: function(response) {
+                {#like갯수 update 해준다#}
+                let updated_like = response['like']
+                {#버튼을 빨간하트로 교체#}
+                let temp_html = ``
+            }
+        });
+    }
+
+    function like_down() {
+        let num
+        let like
+        $.ajax({
+            type: "POST",
+            url: "/like",
+            data: {id_give: {{user_info['id']}}, num_give: num, like_give: like},
+            success: function(response) {
+                {#like갯수 update 해준다#}
+                let updated_like = response['like']
+                {#버튼을 빈 하트로 교체#}
+                let temp_html = ``
+            }
+        });
+    }
+
+    // category
     // category click
     function category(tech_give) {
        $.ajax({
@@ -54,6 +87,8 @@
                                 </li>`
 
                     $('.category').append(temp_html);
+
+
                 }
 
             }

@@ -47,7 +47,8 @@ def main_member():
         user_info = db.user.find_one({"id": payload['id']})
 
         all_cards = list(db.project.find({}, {'_id': False}))
-        like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))  # userid & like_list
+        like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
+        print(like_nums)
 
         like_cards = []
         for like_num in like_nums:
@@ -126,6 +127,46 @@ def sign_in():
 
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+
+
+
+'''
+좋아요 API
+'''
+
+# 좋아요 기능
+@app.route('/like', methods=['POST'])
+def like():
+    id_receive = request.form['id_give'] # 회원 아이디
+    num_receive = request.form['num_give'] # 게시물 num
+    like_receive = int(request.form['like_give']) # 기존 좋아요 개수
+
+    like_list = db.like.find_one({'id': id_receive})
+    like_nums = like_list['like_list']  # [1,2,3]
+
+    # 좋아요가 안된 게시물이라면
+    if num_receive not in like_nums:
+        # db.like에 게시물 num 등록한다.
+        like_nums.append(num_receive)
+        db.like.update_one({'user_id': id_receive}, {'set': {'like_list': like_nums}})
+
+        # db.project에서 게시물의 like를 올려준다
+        db.project.update_one({'num': num_receive}, {'$set': {'like': like_receive + 1}})
+
+        return jsonify({'result': 'success', 'like': like_receive + 1})
+        # db.project.update-> like += 1, db.like.update  / result: like up /
+
+    # 좋아요가 되있는 게시물이라면
+    else:
+        # db.like에 게시물 num를 제외시킨다.
+        like_nums.pop(num_receive)
+        db.like.update_one({'user_id': id_receive}, {'set': {'like_list': like_nums}})
+
+        # db.project에서 게시물의 like를 내려준다
+        db.project.update_one({'num': num_receive}, {'$set': {'like': like_receive - 1}})
+
+        return jsonify({'result': 'success', 'like': like_receive - 1})
+        # db.project.update-> like -= 1, db.like.update / result: like down /
 
 
 if __name__ == '__main__':

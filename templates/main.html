@@ -54,12 +54,18 @@
             {% set project_img = card["project_img"] %}
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
+            {% set like = card["like"] %}
             <li>
                 <div class="all">
-                    <img src="{{ project_img }}" alt="">
+                    <a href="/project">
+                        <img src="{{ project_img }}" alt="">
+                    </a>
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
-                    <i class="fi fi-sr-heart"></i>
+                    <div class="ct">
+                        <button type="button"><img src="../static/image/hart.png" alt="" class="hart"></button>
+                        <p>{{ like }}</p>
+                    </div>
                 </div>
             </li>
         {% endfor %}
@@ -70,16 +76,22 @@
       <a href="javascript:void(0);" onclick="category('Full Stack')" class="fu">Full Stack</a>
     </div>
     <ul class="category">
-        {% for card in fe_cards %}
+        {% for card in all_cards %}
             {% set project_img = card["project_img"] %}
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
+            {% set like = card["like"] %}
             <li>
                 <div class="all">
-                    <img src="{{ project_img }}" alt="">
+                    <a href="/project">
+                        <img src="{{ project_img }}" alt="">
+                    </a>
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
-                    <i class="fi fi-sr-heart"></i>
+                    <div class="ct">
+                        <button type="button"><img src="../static/image/hart.png" alt="" class="hart"></button>
+                        <p>{{ like }}</p>
+                    </div>
                 </div>
             </li>
         {% endfor %}
@@ -175,13 +187,18 @@
                     var tech = rows[i]['tech']
 
                     var temp_html = `<li>
-                                    <div class="all-1">
-                                        <img src="${project_img}" alt="">
-                                        <p>${tech}</p>
-                                        <h3>${user_name}님의 프로젝트</h3>
-                                        <i class="fi fi-sr-heart"></i>
-                                    </div>
-                                </li>`
+                                        <div class="all">
+                                            <a href="/project">
+                                                <img src="${ project_img }" alt="">
+                                            </a>
+                                            <p>${ tech }</p>
+                                            <h3>${ user_name }님의 프로젝트</h3>
+                                            <div class="ct">
+                                                <button type="button"><img src="../static/image/hart.png" alt="" class="hart"></button>
+                                                <p>${ like }</p>
+                                            </div>
+                                        </div>
+                                    </li>`
 
                     $('.category').append(temp_html);
                 }

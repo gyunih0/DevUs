@@ -44,6 +44,7 @@ def project_detail():
 
     return render_template("detail.html", cards=detail_cards)
 
+
 '''
 로그인 후 메인
 '''

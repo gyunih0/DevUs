@@ -140,7 +140,7 @@ border:1px solid #558ab7 !important;
   width: 280px;
   height: 290px;
 }
-.bd ul li .all img {
+.bd ul li .all a img {
   width: 280px;
   height: 150px;
   border-radius: 15px 15px 0px 0px;
@@ -158,32 +158,36 @@ border:1px solid #558ab7 !important;
   margin-bottom: 20px;
 }
 .bd ul li .all .ct {
-  
+
   display: flex;
-  
+
 }
-.bd ul li .all .ct .hart {
+.bd ul li .all > .ct button {
+  width: 18px;
+  height: 16px;
+  border: 0 solid #fff;
+  background-color: #fff;
+}
+.bd ul li .all > .ct button .hart {
   width: 18px;
   height: 15.75px;
   margin-left: 15px;
-  
+
 }
-.bd ul li .all .ct p {
+.bd ul li .all > .ct p {
   margin-top: 1px;
-  margin-left: 5px;
+  margin-left: 25px;
   font-size: 15px;
 }
 
-.bd ul li .all p{
- 
-}
+
 .bd .sec {
   display: flex;
   font-size: 24px;
   margin-top: 100px;
   margin-bottom: 30px;
   cursor: pointer;
-  
+
 }
 .bd .sec a {
   margin-right: 20px;
@@ -194,7 +198,6 @@ border:1px solid #558ab7 !important;
  {
   text-decoration: underline;
 }
-
 .bd .sec h3 {
   margin-right: 30px;
 }
@@ -208,10 +211,16 @@ border:1px solid #558ab7 !important;
   width: 280px;
   height: 290px;
 }
-.bd ul li .all-1 img {
+.bd ul li .all-1 a img {
   width: 280px;
   height: 150px;
   border-radius: 15px 15px 0px 0px;
+}
+.bd ul li .all-1 button {
+  width: 18px;
+  height: 16px;
+  border: 0 solid #fff;
+  background-color: #fff;
 }
 .bd ul li .all-1 p {
   margin-top: 15px;
@@ -379,6 +388,7 @@ border:1px solid #558ab7 !important;
   border: 1px solid #E0A2F5;
   border-radius: 8px;
   color: #fff;
+
 }
 .modal-content .create .box > button:hover {
   background-color: #E0A2F5;
@@ -396,6 +406,7 @@ border:1px solid #558ab7 !important;
   color: rgb(180, 11, 11);
   text-decoration: none;
   cursor: pointer;
+
 }
 button#myBtn{
   width: 80px;

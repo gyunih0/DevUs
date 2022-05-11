@@ -18,7 +18,7 @@
             integrity="sha512-nTHzMQK7lwWt8nL4KF6DhwLHluv6dVq/hNnj2PBN0xMl2KaMm1PM02csx57mmToPAodHmPsipoERRNn4pG7f+Q=="
             crossorigin="anonymous"></script>
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
     <title>DevUs</title>
 
@@ -86,10 +86,10 @@
                     let like_btn = "../static/image/hart.png" //img src
                     for (let j = 0; j< like_nums.length; j++) {
                         if (num == like_nums[j]) {  //like된거라면
-                            like_btn = "../static/image/hart.png"  //빨간 버튼
+                            like_btn = "fas fa-heart hart"  //빨간 버튼
                         }
                         else {  //like안된거라면
-                            like_btn = "../static/image/hart.png" //흰색 버튼
+                            like_btn = "far fa-heart" //흰색 버튼
                         }
                     }
 
@@ -101,7 +101,7 @@
                                             <p>${tech}</p>
                                             <h3>${user_name}님의 프로젝트</h3>
                                             <div class="ct">
-                                                <button type="button"><img src=${like_btn} alt="" class="hart"></button>
+                                                <button type="button"><i class=${like_btn}></i></button>
                                                 <p id="like_num">${like}</p>
                                             </div>
                                         </div>

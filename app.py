@@ -76,6 +76,17 @@ def main_member():
         return redirect(url_for("login", msg="로그인 정보가 없습니다."))
 
 
+@app.route('/main/category')
+def main_category():
+    tech_receive = request.args['tech_give']
+    id_receive = request.args['id_give']
+    tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))
+    print(tech_cards)
+    like_cards = list(db.like.find({'user_id': id_receive}, {'_id': False}))
+
+    return jsonify({'cards_category': tech_cards, 'like_nums': like_cards[0]['like_list']})
+
+
 @app.route("/main", methods=["POST"])
 def project_post():
     user_name_receive = request.form.get('user_name', False)    #폼에서 전송하는 데이터 받는 형식

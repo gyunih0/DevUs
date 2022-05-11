@@ -34,9 +34,14 @@
         <h2>같이 하고싶은 개발자</h2>
     </div>
 
+    {% if exist_token %}
     <button id="myBtn">프로젝트 생성</button>
     </li><img src="../static/image/user.jpeg" alt=""></li>
-
+    {% else %}
+    <li>
+        <button onclick="location.href='/login'">로그인</button>
+    </li>
+    {% endif %}
 </div>
 <div class="sec">
     <h3>{{ cards["tech"] }}</h3>

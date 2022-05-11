@@ -39,8 +39,20 @@ def category():
 
 @app.route('/project/<num_give>')
 def project_detail(num_give):
+    # 상세페이지 카드 가져오기
     detail_cards = db.project.find_one({'num': int(num_give)}, {'_id': False})
-    return render_template("detail.html", cards=detail_cards)
+
+    # 토큰 가져오기
+    token_receive = request.cookies.get('mytoken')
+
+    # 토큰 null 판별을 위한 트리거
+    exist_token = False
+
+    # 토근 null 판별
+    if token_receive is not None:
+        exist_token = True
+
+    return render_template("detail.html", cards=detail_cards, exist_token=exist_token)
 
 
 '''
@@ -76,7 +88,7 @@ def main_member():
 
 @app.route('/main/category')
 def main_category():
-    #get cookie -> userid
+    # get cookie -> userid
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     user_info = db.user.find_one({"id": payload['id']})
@@ -109,7 +121,7 @@ def project_post():
     file = request.files['project_file']  # html에서 파일 가져오기
 
     if file.name != 'project_file':
-        file.save(secure_filename(file.filename))  # 파일저장
+        file.save("./static/test_images/" + secure_filename(file.filename))  # 파일저장
         project_img_receive = file.filename
 
     project_list = list(db.project.find({}, {'_id': False}))

@@ -127,7 +127,7 @@ def project_post():
     project_list = list(db.project.find({}, {'_id': False}))
 
     num = len(project_list) + 1  # 게시물 번호 부여
-    while (len(list(db.project.find({'num': num}))) != 0):  # 게시물 확인
+    while len(list(db.project.find({'num': num}))) != 0:  # 게시물 확인
         num += 1
 
     doc = {

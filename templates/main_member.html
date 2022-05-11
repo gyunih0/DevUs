@@ -172,29 +172,40 @@
         <div class="swiper-pagination"></div>
     </div>
     <h1>{{ user_info['name'] }}님이 관심있는 프로젝트</h1>
-    <ul>
+    <div class="swiper-container swiper2">
+        <div class="swiper-wrapper">
 
-        {% for like_card in like_cards %}
-            {% set num = like_card["num"] %}
-            {% set project_img = like_card["project_img"] %}
-            {% set tech = like_card["tech"] %}
-            {% set user_name = like_card["user_name"] %}
-            {% set like = like_card["like"] %}
-            <li>
-                <div class="all">
-                    <a href="/project/{{ num }}">
-                        <img src="{{ project_img }}" alt="">
-                    </a>
-                    <p>{{ tech }}</p>
-                    <h3>{{ user_name }}님의 프로젝트</h3>
-                    <div class="ct">
-                        <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i></button>
-                        <p id="like_num">{{ like }}</p>
+            {% for like_card in like_cards %}
+                {% set num = like_card["num"] %}
+                {% set project_img = like_card["project_img"] %}
+                {% set tech = like_card["tech"] %}
+                {% set user_name = like_card["user_name"] %}
+                {% set like = like_card["like"] %}
+
+                <div class="swiper-slide">
+                    <div class="all">
+                        <a href="/project/{{ num }}">
+                            <img src="{{ project_img }}" alt="">
+                        </a>
+                        <p>{{ tech }}</p>
+                        <h3>{{ user_name }}님의 프로젝트</h3>
+                        <div class="ct">
+                            <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i></button>
+                            <p id="like_num">{{ like }}</p>
+                        </div>
                     </div>
                 </div>
-            </li>
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+        <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+        <div class="swiper-button-prev"></div>
+        <!-- 이전 버튼 -->
+
+        <!-- 페이징 -->
+        <div class="swiper-pagination"></div>
+
+    </div>
     <div class="sec">
         <a href="javascript:void(0);" onclick="main_category('Front-end')" class="fe">Front-end</a>
         <a href="javascript:void(0);" onclick="main_category('Back-end')" class="ba">Back-end</a>
@@ -257,15 +268,15 @@
                         </div>
                     </div>
                     <div class="dev">
-                        <input type="radio" name="tech" value="front" id="rafo" checked="checked"/>
+                        <input type="radio" name="tech" value="Front-end" id="rafo" checked="checked"/>
                         <label for="rafo">
                             <div>Front-end</div>
                         </label>
-                        <input type="radio" name="tech" value="back" id="raba"/>
+                        <input type="radio" name="tech" value="Back-end" id="raba"/>
                         <label for="raba">
                             <div>Back-end</div>
                         </label>
-                        <input type="radio" name="tech" value="full" id="rafu"/>
+                        <input type="radio" name="tech" value="Full Stack" id="rafu"/>
                         <label for="rafu">
                             <div>Full-stack</div>
                         </label>
@@ -294,6 +305,20 @@
         },
     });
 
+
+    new Swiper(".swiper2 ", {
+        pagination: {
+          // 페이징 설정
+          el: ".swiper-pagination",
+          clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+        },
+        slidesPerView: 4,
+        navigation: {
+          // 네비게이션 설정
+          nextEl: ".swiper-button-next", // 다음 버튼 클래스명
+          prevEl: ".swiper-button-prev", // 이번 버튼 클래스명
+        },
+      });
 
     const toTopEl = document.querySelector('#to-top')
 

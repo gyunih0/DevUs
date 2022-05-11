@@ -159,12 +159,10 @@ border:1px solid #558ab7 !important;
   text-align: center;
 }
 .sec h1 {
-  position: absolute;
+  
   font-size: 40px;
   font-weight: 400;
   line-height: 54px;
-  top: 400px;
-  left: 460px;
   
-  
+  padding-top: 100px;
 }

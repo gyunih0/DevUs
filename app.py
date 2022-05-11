@@ -121,7 +121,7 @@ def project_post():
     file = request.files['project_file']  # html에서 파일 가져오기
 
     if file.name != 'project_file':
-        file.save("./static/test_images/" + secure_filename(file.filename))  # 파일저장
+        file.save("./static/test_image/" + secure_filename(file.filename))  # 파일저장
         project_img_receive = file.filename
 
     project_list = list(db.project.find({}, {'_id': False}))

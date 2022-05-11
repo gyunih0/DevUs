@@ -175,7 +175,7 @@ border:1px solid #558ab7 !important;
   
 }
 .bd ul li .all > .ct p {
-  margin-top: 1px;
+  margin-top: 2px;
   margin-left: 25px;
   font-size: 15px;
 }
@@ -222,6 +222,11 @@ border:1px solid #558ab7 !important;
   border: 0 solid #fff;
   background-color: #fff;
 }
+.bd ul li .all-1 > .ct p {
+  margin-top: 1px;
+  margin-left: 25px;
+  font-size: 15px;
+}
 .bd ul li .all-1 p {
   margin-top: 15px;
   margin-left: 15px;
@@ -244,8 +249,8 @@ border:1px solid #558ab7 !important;
   color: #E0A2F5;
 }
 .bd ul li .all-1 .ct p {
-  margin-top: 1px;
-  margin-left: 5px;
+  margin-top: 2px;
+  margin-left: 25px;
   font-size: 15px;
 }
 

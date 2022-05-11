@@ -198,77 +198,6 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 
 }
 
-.bd ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 1200px
-}
-
-.bd ul li {
-    margin-right: 25px;
-}
-
-.bd ul li:nth-child(4n) {
-    margin-right: 0;
-}
-
-.bd ul li .all {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #DBDBDB;
-    border-radius: 15px 15px 0px 0px;
-    width: 280px;
-    height: 290px;
-}
-
-.bd ul li .all a img {
-    width: 280px;
-    height: 150px;
-    border-radius: 15px 15px 0px 0px;
-}
-
-.bd ul li .all p {
-    margin-top: 15px;
-    margin-left: 15px;
-    margin-bottom: 48px;
-    font-size: 12px;
-    font-family: 'Noto Sans';
-    line-height: 16.34px;
-}
-
-.bd ul li .all h3 {
-    margin-left: 15px;
-    margin-bottom: 20px;
-}
-
-.bd ul li .all .ct {
-
-    display: flex;
-
-}
-
-.bd ul li .all > .ct button {
-    width: 18px;
-    height: 16px;
-    border: 0 solid #fff;
-    background-color: #fff;
-}
-
-.bd ul li .all > .ct button .hart {
-    width: 18px;
-    height: 15.75px;
-    margin-left: 15px;
-
-}
-
-.bd ul li .all > .ct p {
-    margin-top: 2px;
-    margin-left: 25px;
-    font-size: 15px;
-}
-
 
 .bd .sec {
     display: flex;
@@ -292,10 +221,20 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 .bd .sec h3 {
     margin-right: 30px;
 }
-
-.bd ul li .all-1 {
+.bd .category {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.bd .category li {
+    margin-right: 25px;
+}
+.bd .category li:nth-child(4n) {
+    margin-right: 0px;
+}
+.bd .category li .all {
     margin-top: 30px;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     border: 1px solid #DBDBDB;
@@ -304,26 +243,26 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
     height: 290px;
 }
 
-.bd ul li .all-1 a img {
+.bd .category li .all a img {
     width: 280px;
     height: 150px;
     border-radius: 15px 15px 0px 0px;
 }
 
-.bd ul li .all-1 button {
+.bd .category li .all button {
     width: 18px;
     height: 16px;
     border: 0 solid #fff;
     background-color: #fff;
 }
 
-.bd ul li .all-1 > .ct p {
+.bd .category li .all > .ct p {
     margin-top: 1px;
     margin-left: 25px;
     font-size: 15px;
 }
 
-.bd ul li .all-1 p {
+.bd .category li .all p {
     margin-top: 15px;
     margin-left: 15px;
     margin-bottom: 48px;
@@ -332,24 +271,24 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
     line-height: 16.34px;
 }
 
-.bd ul li .all-1 h3 {
+.bd .category li .all h3 {
     margin-left: 15px;
     margin-bottom: 20px;
 }
 
-.bd ul li .all-1 .ct {
+.bd .category li .all .ct {
     display: flex;
 }
 
-.bd ul li .all-1 .ct .hart {
+.bd .category li .all .ct .hart {
     width: 18px;
     height: 15.75px;
     margin-left: 15px;
     color: #E0A2F5;
 }
 
-.bd ul li .all-1 .ct p {
-    margin-top: 2px;
+.bd .category li .all .ct p {
+    margin-top: 0px;
     margin-left: 25px;
     font-size: 15px;
 }
@@ -586,11 +525,13 @@ button#myBtn{
 }
 
 .bd .swiper2 {
+
   margin-top: 60px;
   width: 1200px;
   height: 310px;
 }
 .bd .swiper2 .all {
+  margin-left: 10px;
   width: 280px;
   height: 290px;
   border: 1px solid #DBDBDB;
@@ -625,15 +566,30 @@ button#myBtn{
   width: 18px;
   height: 15.75px;
   margin-left: 15px;
+  color: #E0A2F5;
 }
 .bd .swiper2 .all .ct p{
-  margin-top: 15px;
-  margin-left: 15px;
+  margin-top: 0px;
+  margin-left: 20px;
   margin-bottom: 48px;
   font-size: 12px;
   font-family: 'Noto Sans';
   line-height: 16.34px;
 }
-.swiper-container-horizontal>.swiper-pagination-bullets {
-  bottom: -5px;
+.swiper2 .swiper-pagination {
+  bottom: -2px;
+}
+.swiper2 .swiper-pagination1 {
+  bottom: -30px;
+}
+.swiper-button-next {
+     left:1165px;
+    margin-right: -10px;
+
+}
+.swiper-button-prev {
+    margin-left: -10px;
+}
+.bd .swiper1{
+    width: 1200px;
 }

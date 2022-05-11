@@ -73,14 +73,19 @@ def main_member():
 
         like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
         print("like", like_nums)
-        like_nums = like_nums[0]['like_list']
-        like_cards = []
-        for like_num in like_nums:
-            like_card = db.project.find_one({'num': like_num}, {'_id': False})
-            like_cards.append(like_card)
 
-        return render_template('main_member.html', user_info=user_info, all_cards=all_cards, like_cards=like_cards,
-                               fe_cards=fe_cards, like_nums=like_nums)
+        if not like_nums:  # 첫 회원가임 또는 like 없는상태
+            return render_template('main_member.html', user_info=user_info, all_cards=all_cards,
+                                   fe_cards=fe_cards, like_nums=like_nums)
+        else:
+            like_nums = like_nums[0]['like_list']
+            like_cards = []
+            for like_num in like_nums:
+                like_card = db.project.find_one({'num': like_num}, {'_id': False})
+                like_cards.append(like_card)
+
+            return render_template('main_member.html', user_info=user_info, all_cards=all_cards, like_cards=like_cards,
+                                   fe_cards=fe_cards, like_nums=like_nums)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
@@ -99,14 +104,18 @@ def main_category():
     tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))
     print(tech_cards)
     like_cards = list(db.like.find({'user_id': id_receive}, {'_id': False}))
-    like_nums = like_cards[0]['like_list']
-    print(like_nums)
-
-    for tech_card in tech_cards:
-        if tech_card['num'] in like_nums:
-            tech_card['status'] = 'like'
-        else:
+    if not like_cards:
+        for tech_card in tech_cards:
             tech_card['status'] = 'unlike'
+    else:
+        like_nums = like_cards[0]['like_list']
+        print(like_nums)
+
+        for tech_card in tech_cards:
+            if tech_card['num'] in like_nums:
+                tech_card['status'] = 'like'
+            else:
+                tech_card['status'] = 'unlike'
 
     print(tech_cards)
     return jsonify({'cards_category': tech_cards})

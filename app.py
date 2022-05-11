@@ -38,10 +38,8 @@ def category():
 
 
 @app.route('/project/<num_give>')
-def project_detail():
-    num_receive = request.args['num_give']
-    detail_cards = db.project.find_one({'num': num_receive}, {'_id': False})
-
+def project_detail(num_give):
+    detail_cards = db.project.find_one({'num': int(num_give)}, {'_id': False})
     return render_template("detail.html", cards=detail_cards)
 
 
@@ -74,6 +72,17 @@ def main_member():
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 없습니다."))
+
+
+@app.route('/main/category')
+def main_category():
+    tech_receive = request.args['tech_give']
+    id_receive = request.args['id_give']
+    tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))
+    print(tech_cards)
+    like_cards = list(db.like.find({'user_id': id_receive}, {'_id': False}))
+
+    return jsonify({'cards_category': tech_cards, 'like_nums': like_cards[0]['like_list']})
 
 
 @app.route("/main", methods=["POST"])

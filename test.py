@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import certifi
 
 
+
 ca = certifi.where()
 client = MongoClient('mongodb+srv://test:sparta@cluster0.7y6m3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.devus

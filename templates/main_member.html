@@ -18,7 +18,7 @@
             integrity="sha512-nTHzMQK7lwWt8nL4KF6DhwLHluv6dVq/hNnj2PBN0xMl2KaMm1PM02csx57mmToPAodHmPsipoERRNn4pG7f+Q=="
             crossorigin="anonymous"></script>
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
     <title>DevUs</title>
 
@@ -27,6 +27,10 @@
     function logout() {
       $.removeCookie('mytoken', {path: '/'});
       window.location.href = '/';
+    }
+
+    function like() {
+
     }
 
     function like_up() {
@@ -63,36 +67,51 @@
 
     // category
     // category click
-    function category(tech_give) {
+    function main_category(tech_give) {
        $.ajax({
             type: "GET",
-            url: "/category",
-            data: {tech_give: tech_give},
+            url: "main/category",
+            data: {tech_give: tech_give, user_id: {{user_info['id']}} },
             success: function(response) {
                 $('.category').empty()
-                var rows = response['cards_category']
+                let rows = response['cards_category']
+                let like_nums = response['like_nums']
 
                 for (let i = 0; i < rows.length; i++) {
-                    var user_name = rows[i]['user_name']
-                    var project_img = rows[i]['project_img']
-                    var tech = rows[i]['tech']
+                    let num = rows[i]['num']
+                    let user_name = rows[i]['user_name']
+                    let project_img = rows[i]['project_img']
+                    let tech = rows[i]['tech']
+                    let like = rows[i]['like']
+                    let like_btn = "../static/image/hart.png" //img src
+                    for (let j = 0; j< like_nums.length; j++) {
+                        if (num == like_nums[j]) {  //like된거라면
+                            like_btn = "fas fa-heart hart"  //빨간 버튼
+                        }
+                        else {  //like안된거라면
+                            like_btn = "far fa-heart" //흰색 버튼
+                        }
+                    }
 
-                    var temp_html = `<li>
-                                    <div class="all-1">
-                                        <img src="${project_img}" alt="">
-                                        <p>${tech}</p>
-                                        <h3>${user_name}님의 프로젝트</h3>
-                                        <i class="fi fi-sr-heart"></i>
-                                    </div>
-                                </li>`
+                    let temp_html = `<li>
+                                        <div class="all">
+                                            <a href="/project">
+                                                <img src="${project_img}" alt="">
+                                            </a>
+                                            <p>${tech}</p>
+                                            <h3>${user_name}님의 프로젝트</h3>
+                                            <div class="ct">
+                                                <button type="button"><i class=${like_btn}></i></button>
+                                                <p id="like_num">${like}</p>
+                                            </div>
+                                        </div>
+                                    </li>`
 
                     $('.category').append(temp_html);
-
-
                 }
 
             }
-        });
+       });
     }
 
 
@@ -134,23 +153,30 @@
     <ul>
 
         {% for like_card in like_cards %}
+            {% set num = like_card["num"] %}
             {% set project_img = like_card["project_img"] %}
             {% set tech = like_card["tech"] %}
             {% set user_name = like_card["user_name"] %}
+            {% set like = like_card["like"] %}
             <li>
                 <div class="all">
-                    <img src="{{ project_img }}" alt="">
+                    <a href="/project/{{ num }}">
+                        <img src="{{ project_img }}" alt="">
+                    </a>
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
-                    <i class="fi fi-sr-heart"></i>
+                    <div class="ct">
+                        <button type="button"><img src="../static/image/hart.png" alt="" class="hart"></button>
+                        <p id="like_num">{{ like }}</p>
+                    </div>
                 </div>
             </li>
         {% endfor %}
     </ul>
     <div class="sec">
-      <a href="javascript:void(0);" onclick="category('Front-end')" class="fe">Front-end</a>
-      <a href="javascript:void(0);" onclick="category('Back-end')" class="ba">Back-end</a>
-      <a href="javascript:void(0);" onclick="category('Full Stack')" class="fu">Full Stack</a>
+      <a href="javascript:void(0);" onclick="main_category('Front-end')" class="fe">Front-end</a>
+      <a href="javascript:void(0);" onclick="main_category('Back-end')" class="ba">Back-end</a>
+      <a href="javascript:void(0);" onclick="main_category('Full Stack')" class="fu">Full Stack</a>
     </div>
     <ul class="category">
         {% for card in fe_cards %}
@@ -159,10 +185,15 @@
             {% set user_name = card["user_name"] %}
             <li>
                 <div class="all">
-                    <img src="{{ project_img }}" alt="">
+                    <a href="/project/{{ num }}">
+                        <img src="{{ project_img }}" alt="">
+                    </a>
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
-                    <i class="fi fi-sr-heart"></i>
+                    <div class="ct">
+                        <button type="button"><img src="../static/image/hart.png" alt="" class="hart"></button>
+                        <p id="like_num">{{ like }}</p>
+                    </div>
                 </div>
             </li>
         {% endfor %}

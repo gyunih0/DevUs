@@ -61,7 +61,7 @@ def main_member():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 없습니다."))
 
-@app.route("/main", methods=["POST"])
+@app.route("/main_member", methods=["POST"])
 def project_post():
     user_name_receive = request.form.get('user_name', False)    #폼에서 전송하는 데이터 받는 형식
     tech_receive = request.form.get('tech', False)
@@ -76,7 +76,9 @@ def project_post():
 
     project_list = list(db.project.find({}, {'_id': False}))
 
-    num = len(project_list) + 1  #게시물 번호 부여
+    num = len(project_list) + 1  # 게시물 번호 부여
+    while (len(list(db.project.find({'num': num}))) != 0):  # 게시물 확인
+        num += 1
 
     doc = {
          'num':num,                          #게시물 번호
@@ -89,7 +91,7 @@ def project_post():
 
     db.project.insert_one(doc)  #db 추가
 
-    return render_template('main.html')
+    return render_template('main_member.html')
 
 '''
 회원 가입 API

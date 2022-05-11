@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Antonio&family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
@@ -29,38 +30,43 @@
       window.location.href = '/';
     }
 
-    function like() {
 
-    }
+    function like_up(num) {
+        let num_give = num
 
-    function like_up() {
-        let num
-        let like
         $.ajax({
             type: "POST",
             url: "/like",
-            data: {id_give: {{user_info['id']}}, num_give: num, like_give: like},
+            data: {num_give: num_give},
             success: function(response) {
+                $('like-count').empty()
                 {#like갯수 update 해준다#}
                 let updated_like = response['like']
                 {#버튼을 빨간하트로 교체#}
-                let temp_html = ``
+                let temp_html = `<button onclick="like_down(num)" type="button"><i class="fas fa-heart hart"></i></button>
+                                 <p id="like_num">${updated_like}</p>`
+                $('like-count').append(temp_html)
+                window.location.reload()
             }
         });
     }
 
-    function like_down() {
-        let num
-        let like
+    function like_down(num) {
+        let num_give = num
+
         $.ajax({
             type: "POST",
             url: "/like",
-            data: {id_give: {{user_info['id']}}, num_give: num, like_give: like},
+            data: {num_give: num_give},
             success: function(response) {
+                $('like-count').empty()
                 {#like갯수 update 해준다#}
                 let updated_like = response['like']
                 {#버튼을 빈 하트로 교체#}
-                let temp_html = ``
+                let temp_html = `<button onclick="like_up(num)" type="button"><i class="far fa-heart hart"></i></button>
+                                 <p id="like_num">${updated_like}</p>`
+                $('like-count').append(temp_html)
+                window.location.reload()
             }
         });
     }
@@ -71,11 +77,10 @@
        $.ajax({
             type: "GET",
             url: "main/category",
-            data: {tech_give: tech_give, user_id: {{user_info['id']}} },
+            data: {tech_give: tech_give },
             success: function(response) {
                 $('.category').empty()
                 let rows = response['cards_category']
-                let like_nums = response['like_nums']
 
                 for (let i = 0; i < rows.length; i++) {
                     let num = rows[i]['num']
@@ -83,39 +88,57 @@
                     let project_img = rows[i]['project_img']
                     let tech = rows[i]['tech']
                     let like = rows[i]['like']
-                    let like_btn = "../static/image/hart.png" //img src
-                    for (let j = 0; j< like_nums.length; j++) {
-                        if (num == like_nums[j]) {  //like된거라면
-                            like_btn = "fas fa-heart hart"  //빨간 버튼
-                        }
-                        else {  //like안된거라면
-                            like_btn = "far fa-heart" //흰색 버튼
-                        }
-                    }
-
-                    let temp_html = `<li>
+                    let status = rows[i]['status']
+                    let like_btn = ""
+                    let count_func = ""
+                    if (status === 'like') {
+                         //빨간 버튼
+                        let temp_html = `<li>
                                         <div class="all">
                                             <a href="/project">
                                                 <img src="${project_img}" alt="">
                                             </a>
                                             <p>${tech}</p>
                                             <h3>${user_name}님의 프로젝트</h3>
-                                            <div class="ct">
-                                                <button type="button"><i class=${like_btn}></i></button>
+                                            <div class="ct" id="like-count">
+                                                <button onclick="like_down(${num})" type="button"><i class="fas fa-heart hart"></i></button>
                                                 <p id="like_num">${like}</p>
                                             </div>
                                         </div>
                                     </li>`
 
-                    $('.category').append(temp_html);
+                        $('.category').append(temp_html);
+
+                    }
+                    else {
+
+                        let temp_html = `<li>
+                                        <div class="all">
+                                            <a href="/project">
+                                                <img src="${project_img}" alt="">
+                                            </a>
+                                            <p>${tech}</p>
+                                            <h3>${user_name}님의 프로젝트</h3>
+                                            <div class="ct" id="like-count">
+                                                <button onclick="like_up(${num})" type="button"><i class="far fa-heart hart"></i></button>
+                                                <p id="like_num">${like}</p>
+                                            </div>
+                                        </div>
+                                    </li>`
+
+                        $('.category').append(temp_html);
+                    }
+
+
                 }
 
-            }
-       });
-    }
+
+                }
+            });
+        }
 
 
-  </script>
+    </script>
 
 </head>
 <body>
@@ -148,7 +171,7 @@
         <!-- 페이징 -->
         <div class="swiper-pagination"></div>
     </div>
-    <h1>{{user_info['name']}}님이 관심있는 프로젝트</h1>
+    <h1>{{ user_info['name'] }}님이 관심있는 프로젝트</h1>
     <ul>
 
         {% for like_card in like_cards %}
@@ -165,7 +188,7 @@
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
                     <div class="ct">
-                        <button type="button"><img src="../static/image/hart.png" alt="" class="hart"></button>
+                        <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i></button>
                         <p id="like_num">{{ like }}</p>
                     </div>
                 </div>
@@ -173,15 +196,17 @@
         {% endfor %}
     </ul>
     <div class="sec">
-      <a href="javascript:void(0);" onclick="main_category('Front-end')" class="fe">Front-end</a>
-      <a href="javascript:void(0);" onclick="main_category('Back-end')" class="ba">Back-end</a>
-      <a href="javascript:void(0);" onclick="main_category('Full Stack')" class="fu">Full Stack</a>
+        <a href="javascript:void(0);" onclick="main_category('Front-end')" class="fe">Front-end</a>
+        <a href="javascript:void(0);" onclick="main_category('Back-end')" class="ba">Back-end</a>
+        <a href="javascript:void(0);" onclick="main_category('Full Stack')" class="fu">Full Stack</a>
     </div>
     <ul class="category">
         {% for card in fe_cards %}
+            {% set num = card["num"] %}
             {% set project_img = card["project_img"] %}
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
+            {% set like = card["like"] %}
             <li>
                 <div class="all">
                     <a href="/project/{{ num }}">
@@ -189,9 +214,15 @@
                     </a>
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
-                    <div class="ct">
-                        <button type="button"><img src="../static/image/hart.png" alt="" class="hart"></button>
-                        <p id="like_num">{{ like }}</p>
+                    <div class="ct">'
+                        {% if num in like_nums %}
+                            <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i></button>
+                            <p id="like_num">{{ like }}</p>
+                        {% endif %}
+                        {% if num not in like_nums %}
+                            <button onclick="like_up({{ num }})" type="button"><i class="far fa-heart hart"></i></button>
+                            <p id="like_num">{{ like }}</p>
+                        {% endif %}
                     </div>
                 </div>
             </li>
@@ -251,67 +282,66 @@
     </form>
 
 </div>
-  <script>
-  new Swiper('.swiper1', {
-    pagination : { // 페이징 설정
-      el : '.swiper-pagination',
-      clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
-    },
-    navigation : { // 네비게이션 설정
-      nextEl : '.swiper-button-next', // 다음 버튼 클래스명
-      prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
-    },
-  });
+<script>
+    new Swiper('.swiper1', {
+        pagination: { // 페이징 설정
+            el: '.swiper-pagination',
+            clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+        },
+        navigation: { // 네비게이션 설정
+            nextEl: '.swiper-button-next', // 다음 버튼 클래스명
+            prevEl: '.swiper-button-prev', // 이번 버튼 클래스명
+        },
+    });
 
 
-  const toTopEl = document.querySelector('#to-top')
+    const toTopEl = document.querySelector('#to-top')
 
 
-  // 상단으로 스크롤 버튼을 클릭하면,
-  toTopEl.addEventListener('click', function () {
-    // 페이지 위치를 최상단으로 부드럽게(0.7초 동안) 이동.
-    gsap.to(window, .7, {
-      scrollTo: 0
+    // 상단으로 스크롤 버튼을 클릭하면,
+    toTopEl.addEventListener('click', function () {
+        // 페이지 위치를 최상단으로 부드럽게(0.7초 동안) 이동.
+        gsap.to(window, .7, {
+            scrollTo: 0
+        })
     })
-  })
 
 
-  /**
-   * 순서대로 나타나는 기능
-   */
-  // 나타날 요소들(.fade-in) 찾기.
-  const fadeEls = document.querySelectorAll('.visual .fade-in')
-  // 나타날 요소들을 하나씩 반복해서 처리!
-  fadeEls.forEach(function (fadeEl, index) {
-    // 각 요소들을 순서대로(delay) 보여지게 함!
-    gsap.to(fadeEl, 1, {
-      delay: (index + 1) * .7,
-      opacity: 1
+    /**
+     * 순서대로 나타나는 기능
+     */
+        // 나타날 요소들(.fade-in) 찾기.
+    const fadeEls = document.querySelectorAll('.visual .fade-in')
+    // 나타날 요소들을 하나씩 반복해서 처리!
+    fadeEls.forEach(function (fadeEl, index) {
+        // 각 요소들을 순서대로(delay) 보여지게 함!
+        gsap.to(fadeEl, 1, {
+            delay: (index + 1) * .7,
+            opacity: 1
+        })
     })
-  })
-
 
     // modal
-  var modal = document.getElementById('myModal');
+    var modal = document.getElementById('myModal');
 
-  // modal button
-  var btn = document.getElementById("myBtn");
+    // modal button
+    var btn = document.getElementById("myBtn");
 
-  //<span> closes modal button
-  var span = document.getElementsByClassName("close")[0];
+    //<span> closes modal button
+    var span = document.getElementsByClassName("close")[0];
 
-  // btn을 클릭하면 모달 보임(열림)
-  btn.onclick = function () {
-      modal.style.display = "block";
-  }
+    // btn을 클릭하면 모달 보임(열림)
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
 
-  // <span> (x) 를 클릭하면 보이지않음(닫힘)
-  span.onclick = function () {
-      modal.style.display = "none";
-  }
+    // <span> (x) 를 클릭하면 보이지않음(닫힘)
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
 
 
-  $(document).ready(function () {
+    $(document).ready(function () {
         var fileTarge = $('.filebox .upload-hidden');
         fileTarge.on('change', function () {
             if (window.FileReader) {
@@ -324,7 +354,7 @@
 
     });
 
-  </script>
+</script>
 </body>
 
 </html>

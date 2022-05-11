@@ -19,6 +19,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollToPlugin.min.js" integrity="sha512-nTHzMQK7lwWt8nL4KF6DhwLHluv6dVq/hNnj2PBN0xMl2KaMm1PM02csx57mmToPAodHmPsipoERRNn4pG7f+Q==" crossorigin="anonymous"></script>
 
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="../static/detail.css">
 
@@ -32,8 +35,7 @@
     </div>
 
     <button id="myBtn">프로젝트 생성</button>
-    </li>
-    <img src="../static/image/user.jpeg" alt=""></li>
+    </li><img src="../static/image/user.jpeg" alt=""></li>
 
 </div>
 <div class="sec">
@@ -42,12 +44,13 @@
     <div class="user">
         <img src="../static/image/user.jpeg" alt="">
         <p>{{ cards["user_name"] }}</p>
-        <img src="../static/image/hart.png" alt="">
+        <i class="fas fa-heart hart"></i>
         <p>{{ cards["like"] }}</p>
     </div>
     <hr>
     <div class="dec-box">
-        <h1>{{ cards["description"] }}</h1>
+        <img src="{{ cards["project_img"] }}" alt="">
+        <div class="description">{{ cards["description"] }}</div>
     </div>
 </div>
 <script>

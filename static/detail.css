@@ -196,6 +196,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 }
 
 .sec > h3 {
+    font-size: 18px;
     width: 120px;
     padding: 7px;
     border: 1px solid #E0A2F5;
@@ -231,6 +232,13 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 
 .sec .user p {
     margin-right: 10px;
+    font-size: 16px;
+}
+
+.sec .user i {
+    font-size: 2rem;
+    color: #ff3f3e;
+    margin-right: 10px;
 }
 
 .sec hr {
@@ -244,12 +252,27 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
     text-align: center;
 }
 
-.sec > .dec-box {
-    width: 800px;
-    margin-top: 70px;
+.sec .dec-box {
+    width: 1000px;
+    padding: 30px;
+    display: flex;
 }
-.sec > .dec-box > h1 {
+.sec .dec-box .description {
+    width: 100%;
+    padding: 30px;
+    font-size: 20px;
+    text-align: left;
+
+}
+
+.sec .dec-box h1 {
     font-size: 40px;
     font-weight: 400;
     line-height: 54px;
+}
+
+.sec .dec-box img {
+    width: 500px;
+    margin-bottom: 30px;
+    border-radius: 15px;
 }

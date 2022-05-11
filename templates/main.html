@@ -4,33 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/main.css">
+
+    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Antonio&family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+    <!-- 스크롤바 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
-            integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ=="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollToPlugin.min.js"
-            integrity="sha512-nTHzMQK7lwWt8nL4KF6DhwLHluv6dVq/hNnj2PBN0xMl2KaMm1PM02csx57mmToPAodHmPsipoERRNn4pG7f+Q=="
-            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollToPlugin.min.js" integrity="sha512-nTHzMQK7lwWt8nL4KF6DhwLHluv6dVq/hNnj2PBN0xMl2KaMm1PM02csx57mmToPAodHmPsipoERRNn4pG7f+Q==" crossorigin="anonymous"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
 
     <title>DevUs</title>
 </head>
 <body>
 <div class="hd">
     <div class="title">
-        <p>Dev</p>
-        <p class="us">Us</p>
+        <a href="./main.html">Dev</a><a class="us" href="./main.html">Us</a>
         <h2>같이 하고싶은 개발자</h2>
     </div>
     <ul>
-        <li>
-            <button id="myBtn">프로젝트 생성</button>
-        </li>
         <li>
             <button onclick="location.href='login'">로그인</button>
         </li>
@@ -54,15 +60,22 @@
     <h1>All</h1>
     <ul>
         {% for card in all_cards %}
+            {% set num = card["num"] %}
             {% set project_img = card["project_img"] %}
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
+            {% set like = card["like"] %}
             <li>
                 <div class="all">
-                    <img src="{{ project_img }}" alt="">
+                    <a href="/project/{{ num }}">
+                        <img src="{{ project_img }}" alt="">
+                    </a>
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
-                    <i class="fi fi-sr-heart"></i>
+                    <div class="ct">
+                        <button type="button"><i class="fas fa-heart hart"></i></button>
+                        <p>{{ like }}</p>
+                    </div>
                 </div>
             </li>
         {% endfor %}
@@ -73,16 +86,22 @@
       <a href="javascript:void(0);" onclick="category('Full Stack')" class="fu">Full Stack</a>
     </div>
     <ul class="category">
-        {% for card in fe_cards %}
+        {% for card in all_cards %}
             {% set project_img = card["project_img"] %}
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
+            {% set like = card["like"] %}
             <li>
                 <div class="all">
-                    <img src="{{ project_img }}" alt="">
+                    <a href="/project">
+                        <img src="{{ project_img }}" alt="">
+                    </a>
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
-                    <i class="fi fi-sr-heart"></i>
+                    <div class="ct">
+                        <button type="button"><i class="fas fa-heart hart"></i></button>
+                        <p>{{ like }}</p>
+                    </div>
                 </div>
             </li>
         {% endfor %}
@@ -93,36 +112,67 @@
     </div>
 </div>
 <div id="myModal" class="modal">
+    <form action="" method="post" enctype="multipart/form-data">
 
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="create">
-            <h1>프로젝트 생성하기</h1>
-            <div class="name">
-                <p>이름</p>
-                <input type="text">
-            </div>
-            <div class="pr">
-                <p>프로젝트 이미지</p>
-                <input type="text">
-                <button>파일선택</button>
-            </div>
-            <div class="dev">
-                <button>Front-end</button>
-                <button>Back-end</button>
-                <button>Full-stack</button>
-            </div>
-            <div class="content">
-                <p>상세설명</p>
-                <input type="text">
-            </div>
+        <div class="modal-content">
+            <div class="create">
+                <div class="title">
+                    <h1>프로젝트 생성하기</h1>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="box">
+                    <div class="name">
+                        <p>이름</p>
+                        <input type="text" id="user_name" name="user_name">
+                    </div>
+                    <div class="pr">
+                        <p>프로젝트 이미지</p>
+                        <div class="filebox">
+                            <input class="upload-name" value="파일을 선택해주세요." disabled="disabled" name="project_img">
+                            <label for="project_img">업로드</label>
+                            <input type="file" id="project_img" class="upload-hidden" name="project_file">
+                            &nbsp 한글 파일은 업로드 되지 않습니다.
+                        </div>
+                    </div>
+                    <div class="dev">
+                        <input type="radio" name="tech" value="front" id="rafo" checked="checked"/>
+                        <label for="rafo">
+                            <div>Front-end</div>
+                        </label>
+                        <input type="radio" name="tech" value="back" id="raba"/>
+                        <label for="raba">
+                            <div>Back-end</div>
+                        </label>
+                        <input type="radio" name="tech" value="full" id="rafu"/>
+                        <label for="rafu">
+                            <div>Full-stack</div>
+                        </label>
+                    </div>
+                    <div class="content">
+                        <p>상세설명</p>
+                        <textarea id="description" name="description"></textarea>
+                    </div>
+                    <button onclick="onsubmit()">저장</button>
 
-            <button>저장</button>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 
 </div>
 <script>
+    $(document).ready(function () {
+        var fileTarge = $('.filebox .upload-hidden');
+        fileTarge.on('change', function () {
+            if (window.FileReader) {
+                var filename = $(this)[0].files[0].name;
+            } else {
+                var filename = $(this).val().split('/').pop().split('\\').pop();
+            }
+            $(this).siblings('.upload-name').val(filename);
+        });
+
+    });
     new Swiper('.swiper1', {
         pagination: { // 페이징 설정
             el: '.swiper-pagination',
@@ -170,22 +220,28 @@
             data: {tech_give: tech_give},
             success: function(response) {
                 $('.category').empty()
-                var rows = response['cards_category']
+                let rows = response['cards_category']
 
                 for (let i = 0; i < rows.length; i++) {
-                    var user_name = rows[i]['user_name']
-                    var project_img = rows[i]['project_img']
-                    var tech = rows[i]['tech']
+                    let user_name = rows[i]['user_name']
+                    let project_img = rows[i]['project_img']
+                    let tech = rows[i]['tech']
+                    let like = rows[i]['like']
 
-                    var temp_html = `<li>
-                                    <div class="all-1">
-                                        <img src="${project_img}" alt="">
-                                        <p>${tech}</p>
-                                        <h3>${user_name}님의 프로젝트</h3>
-                                        <i class="fi fi-sr-heart"></i>
-                                    </div>
-                                </li>`
 
+                    let temp_html = `<li>
+                                        <div class="all">
+                                            <a href="/project">
+                                                <img src="${project_img}" alt="">
+                                            </a>
+                                            <p>${tech}</p>
+                                            <h3>${user_name}님의 프로젝트</h3>
+                                            <div class="ct">
+                                                <button type="button"><i class="fas fa-heart hart"></i></button>
+                                                <p>${like}</p>
+                                            </div>
+                                        </div>
+                                    </li>`
                     $('.category').append(temp_html);
                 }
 

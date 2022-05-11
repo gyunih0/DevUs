@@ -90,6 +90,13 @@ body {
 .bd .join-box ul li {
   margin-bottom: 12px;
 }
+
+.bd .join-box ul li #help-id {
+  color: red;
+}
+.bd .join-box ul li #help-password {
+  color: red;
+}
 .bd .join-box ul li p{
   font-size: 5px;
 }

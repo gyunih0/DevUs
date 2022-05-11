@@ -24,6 +24,8 @@ db = client.devus
 
 @app.route('/')
 def main():
+    top3_cards = list(db.project.find({}))
+    print(top3_cards)
     all_cards = list(db.project.find({}, {'_id': False}))
     fe_cards = list(db.project.find({'tech': 'Front-end'}, {'_id': False}))
     return render_template("main.html", all_cards=all_cards, fe_cards=fe_cards)
@@ -32,6 +34,7 @@ def main():
 @app.route('/category')
 def category():
     tech_receive = request.args['tech_give']
+    print(tech_receive)
     tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))
     print(tech_cards)
     return jsonify({'cards_category': tech_cards})
@@ -120,7 +123,7 @@ def project_post():
 
     file = request.files['project_file']  # html에서 파일 가져오기
 
-    if file.name != 'project_file':
+    if file.filename != 'project_file':
         file.save("./static/test_image/" + secure_filename(file.filename))  # 파일저장
         project_img_receive = file.filename
 
@@ -134,7 +137,7 @@ def project_post():
         'num': num,  # 게시물 번호
         'user_name': user_name_receive,  # 게시물 작성자 이름
         'project_img': project_img_receive,  # 게시물 이미지
-        'tech_receive': tech_receive,  # 기술(fn,bn,ful)
+        'tech': tech_receive,  # 기술(fn,bn,ful)
         'description': description_receive,  # 상세 설명
         'like': 0  # 좋아요 초기값 0
     }

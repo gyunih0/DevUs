@@ -13,13 +13,14 @@ import certifi
 SECRET_KEY = 'DEVUS'
 
 ca = certifi.where()
-client = MongoClient('mongodb+srv://test:sparta@cluster0.7y6m3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', tlsCAFile=ca)
+client = MongoClient('mongodb+srv://test:sparta@cluster0.7y6m3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+                     tlsCAFile=ca)
 db = client.devus
-
 
 '''
 메인페이지 API
 '''
+
 
 @app.route('/')
 def main():
@@ -36,10 +37,9 @@ def category():
     return jsonify({'cards_category': tech_cards})
 
 
-@app.route('/project')
+@app.route('/project/<num_give>')
 def project_detail():
-    # num_receive = request.args['num_give']
-    num_receive = 1;
+    num_receive = request.args['num_give']
     detail_cards = db.project.find_one({'num': num_receive}, {'_id': False})
 
     return render_template("detail.html", cards=detail_cards)
@@ -49,9 +49,9 @@ def project_detail():
 로그인 후 메인
 '''
 
+
 @app.route('/main')
 def main_member():
-
     token_receive = request.cookies.get('mytoken')
 
     try:
@@ -77,6 +77,7 @@ def main_member():
 '''
 회원 가입 API
 '''
+
 
 # HTML rendering
 @app.route('/join')
@@ -106,10 +107,10 @@ def check_dup():
     return jsonify({'result': 'success', 'exists': exists})
 
 
-
 '''
 로그인 API
 '''
+
 
 # HTML rendering
 @app.route('/login')
@@ -130,8 +131,8 @@ def sign_in():
 
     if result is not None:
         payload = {
-         'id': id_receive,
-         'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+            'id': id_receive,
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
@@ -141,17 +142,17 @@ def sign_in():
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
-
 '''
 좋아요 API
 '''
 
+
 # 좋아요 기능
 @app.route('/like', methods=['POST'])
 def like():
-    id_receive = request.form['id_give'] # 회원 아이디
-    num_receive = request.form['num_give'] # 게시물 num
-    like_receive = int(request.form['like_give']) # 기존 좋아요 개수
+    id_receive = request.form['id_give']  # 회원 아이디
+    num_receive = request.form['num_give']  # 게시물 num
+    like_receive = int(request.form['like_give'])  # 기존 좋아요 개수
 
     like_list = db.like.find_one({'id': id_receive})
     like_nums = like_list['like_list']  # [1,2,3]
@@ -171,7 +172,7 @@ def like():
     # 좋아요가 되있는 게시물이라면
     else:
         # db.like에 게시물 num를 제외시킨다.
-        like_nums.pop(num_receive)
+        like_nums.remove(num_receive)
         db.like.update_one({'user_id': id_receive}, {'set': {'like_list': like_nums}})
 
         # db.project에서 게시물의 like를 내려준다

@@ -29,9 +29,6 @@
     </div>
     <ul>
         <li>
-            <button id="myBtn">프로젝트 생성</button>
-        </li>
-        <li>
             <button onclick="location.href='login'">로그인</button>
         </li>
     </ul>
@@ -176,24 +173,6 @@
         });
     }
 
-    // modal
-    var modal = document.getElementById('myModal');
-
-    // modal button
-    var btn = document.getElementById("myBtn");
-
-    //<span> closes modal button
-    var span = document.getElementsByClassName("close")[0];
-
-    // btn을 클릭하면 모달 보임(열림)
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-
-    // <span> (x) 를 클릭하면 보이지않음(닫힘)
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
 </script>
 </body>
 

@@ -60,14 +60,14 @@ def main_member():
 
         like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
         print("like", like_nums)
-
+        like_nums = like_nums[0]['like_list']
         like_cards = []
-        for like_num in like_nums[0]['like_list']:
+        for like_num in like_nums:
             like_card = db.project.find_one({'num': like_num}, {'_id': False})
             like_cards.append(like_card)
 
         return render_template('main_member.html', user_info=user_info, all_cards=all_cards, like_cards=like_cards,
-                               fe_cards=fe_cards)
+                               fe_cards=fe_cards, like_nums=like_nums)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
@@ -76,13 +76,27 @@ def main_member():
 
 @app.route('/main/category')
 def main_category():
+    #get cookie -> userid
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.user.find_one({"id": payload['id']})
+
     tech_receive = request.args['tech_give']
-    id_receive = request.args['id_give']
+    id_receive = user_info['id']
     tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))
     print(tech_cards)
     like_cards = list(db.like.find({'user_id': id_receive}, {'_id': False}))
+    like_nums = like_cards[0]['like_list']
+    print(like_nums)
 
-    return jsonify({'cards_category': tech_cards, 'like_nums': like_cards[0]['like_list']})
+    for tech_card in tech_cards:
+        if tech_card['num'] in like_nums:
+            tech_card['status'] = 'like'
+        else:
+            tech_card['status'] = 'unlike'
+
+    print(tech_cards)
+    return jsonify({'cards_category': tech_cards})
 
 
 @app.route("/main", methods=["POST"])
@@ -194,18 +208,29 @@ def sign_in():
 # 좋아요 기능
 @app.route('/like', methods=['POST'])
 def like():
-    id_receive = request.form['id_give']  # 회원 아이디
-    num_receive = request.form['num_give']  # 게시물 num
-    like_receive = int(request.form['like_give'])  # 기존 좋아요 개수
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.user.find_one({"id": payload['id']})
 
-    like_list = db.like.find_one({'id': id_receive})
+    id_receive = user_info['id']  # 회원 아이디
+    print(id_receive)
+    num_receive = int(request.form['num_give'])  # 게시물 num
+    # like_receive = int(request.form['like_give'])  # 기존 좋아요 개수
+
+    project = db.project.find_one({'num': num_receive})
+    like_receive = project['like']
+
+    like_list = db.like.find_one({'user_id': id_receive})
+
     like_nums = like_list['like_list']  # [1,2,3]
-
+    print(like_nums)
     # 좋아요가 안된 게시물이라면
     if num_receive not in like_nums:
+        print("test")
         # db.like에 게시물 num 등록한다.
         like_nums.append(num_receive)
-        db.like.update_one({'user_id': id_receive}, {'set': {'like_list': like_nums}})
+        print(like_nums)
+        db.like.update_one({'user_id': id_receive}, {'$set': {'like_list': like_nums}})
 
         # db.project에서 게시물의 like를 올려준다
         db.project.update_one({'num': num_receive}, {'$set': {'like': like_receive + 1}})
@@ -217,7 +242,7 @@ def like():
     else:
         # db.like에 게시물 num를 제외시킨다.
         like_nums.remove(num_receive)
-        db.like.update_one({'user_id': id_receive}, {'set': {'like_list': like_nums}})
+        db.like.update_one({'user_id': id_receive}, {'$set': {'like_list': like_nums}})
 
         # db.project에서 게시물의 like를 내려준다
         db.project.update_one({'num': num_receive}, {'$set': {'like': like_receive - 1}})

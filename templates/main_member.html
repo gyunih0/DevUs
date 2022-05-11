@@ -29,38 +29,43 @@
       window.location.href = '/';
     }
 
-    function like() {
 
-    }
+    function like_up(num) {
+        let num_give = num
 
-    function like_up() {
-        let num
-        let like
         $.ajax({
             type: "POST",
             url: "/like",
-            data: {id_give: {{user_info['id']}}, num_give: num, like_give: like},
+            data: {num_give: num_give},
             success: function(response) {
+                $('like-count').empty()
                 {#like갯수 update 해준다#}
                 let updated_like = response['like']
                 {#버튼을 빨간하트로 교체#}
-                let temp_html = ``
+                let temp_html = `<button onclick="like_down(num)" type="button"><i class="fas fa-heart hart"></i></button>
+                                 <p id="like_num">${updated_like}</p>`
+                $('like-count').append(temp_html)
+                window.location.reload()
             }
         });
     }
 
-    function like_down() {
-        let num
-        let like
+    function like_down(num) {
+        let num_give = num
+
         $.ajax({
             type: "POST",
             url: "/like",
-            data: {id_give: {{user_info['id']}}, num_give: num, like_give: like},
+            data: {num_give: num_give},
             success: function(response) {
+                $('like-count').empty()
                 {#like갯수 update 해준다#}
                 let updated_like = response['like']
                 {#버튼을 빈 하트로 교체#}
-                let temp_html = ``
+                let temp_html = `<button onclick="like_up(num)" type="button"><i class="far fa-heart hart"></i></button>
+                                 <p id="like_num">${updated_like}</p>`
+                $('like-count').append(temp_html)
+                window.location.reload()
             }
         });
     }
@@ -71,11 +76,10 @@
        $.ajax({
             type: "GET",
             url: "main/category",
-            data: {tech_give: tech_give, user_id: {{user_info['id']}} },
+            data: {tech_give: tech_give },
             success: function(response) {
                 $('.category').empty()
                 let rows = response['cards_category']
-                let like_nums = response['like_nums']
 
                 for (let i = 0; i < rows.length; i++) {
                     let num = rows[i]['num']
@@ -83,31 +87,48 @@
                     let project_img = rows[i]['project_img']
                     let tech = rows[i]['tech']
                     let like = rows[i]['like']
-                    let like_btn = "../static/image/hart.png" //img src
-                    for (let j = 0; j< like_nums.length; j++) {
-                        if (num == like_nums[j]) {  //like된거라면
-                            like_btn = "fas fa-heart hart"  //빨간 버튼
-                        }
-                        else {  //like안된거라면
-                            like_btn = "far fa-heart" //흰색 버튼
-                        }
-                    }
-
-                    let temp_html = `<li>
+                    let status = rows[i]['status']
+                    let like_btn = ""
+                    let count_func = ""
+                    if (status === 'like') {
+                         //빨간 버튼
+                        let temp_html = `<li>
                                         <div class="all">
                                             <a href="/project">
                                                 <img src="${project_img}" alt="">
                                             </a>
                                             <p>${tech}</p>
                                             <h3>${user_name}님의 프로젝트</h3>
-                                            <div class="ct">
-                                                <button type="button"><i class=${like_btn}></i></button>
+                                            <div class="ct" id="like-count">
+                                                <button onclick="like_down(${num})" type="button"><i class="fas fa-heart hart"></i></button>
                                                 <p id="like_num">${like}</p>
                                             </div>
                                         </div>
                                     </li>`
 
-                    $('.category').append(temp_html);
+                        $('.category').append(temp_html);
+
+                    }
+                    else {
+
+                        let temp_html = `<li>
+                                        <div class="all">
+                                            <a href="/project">
+                                                <img src="${project_img}" alt="">
+                                            </a>
+                                            <p>${tech}</p>
+                                            <h3>${user_name}님의 프로젝트</h3>
+                                            <div class="ct" id="like-count">
+                                                <button onclick="like_up(${num})" type="button"><i class="far fa-heart hart"></i></button>
+                                                <p id="like_num">${like}</p>
+                                            </div>
+                                        </div>
+                                    </li>`
+
+                        $('.category').append(temp_html);
+                    }
+
+
                 }
 
             }
@@ -165,7 +186,7 @@
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
                     <div class="ct">
-                        <button type="button"><img src="../static/image/hart.png" alt="" class="hart"></button>
+                        <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i></button>
                         <p id="like_num">{{ like }}</p>
                     </div>
                 </div>
@@ -179,9 +200,11 @@
     </div>
     <ul class="category">
         {% for card in fe_cards %}
+            {% set num = card["num"] %}
             {% set project_img = card["project_img"] %}
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
+            {% set like = card["like"] %}
             <li>
                 <div class="all">
                     <a href="/project/{{ num }}">
@@ -189,9 +212,15 @@
                     </a>
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
-                    <div class="ct">
-                        <button type="button"><img src="../static/image/hart.png" alt="" class="hart"></button>
-                        <p id="like_num">{{ like }}</p>
+                    <div class="ct">'
+                        {% if num in like_nums %}
+                            <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i></button>
+                            <p id="like_num">{{ like }}</p>
+                        {% endif %}
+                        {% if num not in like_nums %}
+                            <button onclick="like_up({{ num }})" type="button"><i class="far fa-heart hart"></i></button>
+                            <p id="like_num">{{ like }}</p>
+                        {% endif %}
                     </div>
                 </div>
             </li>

@@ -1,9 +1,8 @@
 import hashlib
-import jwt
-from flask import Flask, render_template, jsonify, request, session, redirect, url_for
-import requests
 from datetime import datetime, timedelta
-import gridfs
+
+import jwt
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -69,7 +68,8 @@ def main_member():
             like_card = db.project.find_one({'num': like_num}, {'_id': False})
             like_cards.append(like_card)
 
-        return render_template('main_member.html', user_info=user_info, all_cards=all_cards, like_cards=like_cards, fe_cards=fe_cards)
+        return render_template('main_member.html', user_info=user_info, all_cards=all_cards, like_cards=like_cards,
+                               fe_cards=fe_cards)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
@@ -78,7 +78,7 @@ def main_member():
 
 @app.route("/main", methods=["POST"])
 def project_post():
-    user_name_receive = request.form.get('user_name', False)    #폼에서 전송하는 데이터 받는 형식
+    user_name_receive = request.form.get('user_name', False)  # 폼에서 전송하는 데이터 받는 형식
     tech_receive = request.form.get('tech', False)
     description_receive = request.form.get('description', False)
     project_img_receive = 'none'
@@ -86,25 +86,26 @@ def project_post():
     file = request.files['project_file']  # html에서 파일 가져오기
 
     if file.name != 'project_file':
-        file.save(secure_filename(file.filename))     #파일저장
+        file.save(secure_filename(file.filename))  # 파일저장
         project_img_receive = file.filename
 
     project_list = list(db.project.find({}, {'_id': False}))
 
-    num = len(project_list) + 1  #게시물 번호 부여
+    num = len(project_list) + 1  # 게시물 번호 부여
 
     doc = {
-         'num':num,                          #게시물 번호
-         'user_name':user_name_receive,      #게시물 작성자 이름
-         'project_img':project_img_receive,  #게시물 이미지
-         'tech_receive':tech_receive,        #기술(fn,bn,ful)
-         'description':description_receive,  #상세 설명
-         'like':0                            #좋아요 초기값 0
+        'num': num,  # 게시물 번호
+        'user_name': user_name_receive,  # 게시물 작성자 이름
+        'project_img': project_img_receive,  # 게시물 이미지
+        'tech_receive': tech_receive,  # 기술(fn,bn,ful)
+        'description': description_receive,  # 상세 설명
+        'like': 0  # 좋아요 초기값 0
     }
 
-    db.project.insert_one(doc)  #db 추가
+    db.project.insert_one(doc)  # db 추가
 
     return render_template('main.html')
+
 
 '''
 회원 가입 API

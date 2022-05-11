@@ -159,7 +159,7 @@ def like():
     # 좋아요가 되있는 게시물이라면
     else:
         # db.like에 게시물 num를 제외시킨다.
-        like_nums.pop(num_receive)
+        like_nums.remove(num_receive)
         db.like.update_one({'user_id': id_receive}, {'set': {'like_list': like_nums}})
 
         # db.project에서 게시물의 like를 내려준다

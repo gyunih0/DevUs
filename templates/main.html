@@ -91,6 +91,8 @@
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
             {% set like = card["like"] %}
+
+            {% if tech == 'Front-end' %}
             <li>
                 <div class="all">
                     <a href="/project">
@@ -104,6 +106,7 @@
                     </div>
                 </div>
             </li>
+            {% endif %}
         {% endfor %}
     </ul>
 

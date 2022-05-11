@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Antonio&family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
@@ -131,12 +132,13 @@
 
                 }
 
-            }
-       });
-    }
+
+                }
+            });
+        }
 
 
-  </script>
+    </script>
 
 </head>
 <body>
@@ -169,7 +171,7 @@
         <!-- 페이징 -->
         <div class="swiper-pagination"></div>
     </div>
-    <h1>{{user_info['name']}}님이 관심있는 프로젝트</h1>
+    <h1>{{ user_info['name'] }}님이 관심있는 프로젝트</h1>
     <ul>
 
         {% for like_card in like_cards %}
@@ -194,9 +196,9 @@
         {% endfor %}
     </ul>
     <div class="sec">
-      <a href="javascript:void(0);" onclick="main_category('Front-end')" class="fe">Front-end</a>
-      <a href="javascript:void(0);" onclick="main_category('Back-end')" class="ba">Back-end</a>
-      <a href="javascript:void(0);" onclick="main_category('Full Stack')" class="fu">Full Stack</a>
+        <a href="javascript:void(0);" onclick="main_category('Front-end')" class="fe">Front-end</a>
+        <a href="javascript:void(0);" onclick="main_category('Back-end')" class="ba">Back-end</a>
+        <a href="javascript:void(0);" onclick="main_category('Full Stack')" class="fu">Full Stack</a>
     </div>
     <ul class="category">
         {% for card in fe_cards %}
@@ -280,67 +282,66 @@
     </form>
 
 </div>
-  <script>
-  new Swiper('.swiper1', {
-    pagination : { // 페이징 설정
-      el : '.swiper-pagination',
-      clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
-    },
-    navigation : { // 네비게이션 설정
-      nextEl : '.swiper-button-next', // 다음 버튼 클래스명
-      prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
-    },
-  });
+<script>
+    new Swiper('.swiper1', {
+        pagination: { // 페이징 설정
+            el: '.swiper-pagination',
+            clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+        },
+        navigation: { // 네비게이션 설정
+            nextEl: '.swiper-button-next', // 다음 버튼 클래스명
+            prevEl: '.swiper-button-prev', // 이번 버튼 클래스명
+        },
+    });
 
 
-  const toTopEl = document.querySelector('#to-top')
+    const toTopEl = document.querySelector('#to-top')
 
 
-  // 상단으로 스크롤 버튼을 클릭하면,
-  toTopEl.addEventListener('click', function () {
-    // 페이지 위치를 최상단으로 부드럽게(0.7초 동안) 이동.
-    gsap.to(window, .7, {
-      scrollTo: 0
+    // 상단으로 스크롤 버튼을 클릭하면,
+    toTopEl.addEventListener('click', function () {
+        // 페이지 위치를 최상단으로 부드럽게(0.7초 동안) 이동.
+        gsap.to(window, .7, {
+            scrollTo: 0
+        })
     })
-  })
 
 
-  /**
-   * 순서대로 나타나는 기능
-   */
-  // 나타날 요소들(.fade-in) 찾기.
-  const fadeEls = document.querySelectorAll('.visual .fade-in')
-  // 나타날 요소들을 하나씩 반복해서 처리!
-  fadeEls.forEach(function (fadeEl, index) {
-    // 각 요소들을 순서대로(delay) 보여지게 함!
-    gsap.to(fadeEl, 1, {
-      delay: (index + 1) * .7,
-      opacity: 1
+    /**
+     * 순서대로 나타나는 기능
+     */
+        // 나타날 요소들(.fade-in) 찾기.
+    const fadeEls = document.querySelectorAll('.visual .fade-in')
+    // 나타날 요소들을 하나씩 반복해서 처리!
+    fadeEls.forEach(function (fadeEl, index) {
+        // 각 요소들을 순서대로(delay) 보여지게 함!
+        gsap.to(fadeEl, 1, {
+            delay: (index + 1) * .7,
+            opacity: 1
+        })
     })
-  })
-
 
     // modal
-  var modal = document.getElementById('myModal');
+    var modal = document.getElementById('myModal');
 
-  // modal button
-  var btn = document.getElementById("myBtn");
+    // modal button
+    var btn = document.getElementById("myBtn");
 
-  //<span> closes modal button
-  var span = document.getElementsByClassName("close")[0];
+    //<span> closes modal button
+    var span = document.getElementsByClassName("close")[0];
 
-  // btn을 클릭하면 모달 보임(열림)
-  btn.onclick = function () {
-      modal.style.display = "block";
-  }
+    // btn을 클릭하면 모달 보임(열림)
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
 
-  // <span> (x) 를 클릭하면 보이지않음(닫힘)
-  span.onclick = function () {
-      modal.style.display = "none";
-  }
+    // <span> (x) 를 클릭하면 보이지않음(닫힘)
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
 
 
-  $(document).ready(function () {
+    $(document).ready(function () {
         var fileTarge = $('.filebox .upload-hidden');
         fileTarge.on('change', function () {
             if (window.FileReader) {
@@ -353,7 +354,7 @@
 
     });
 
-  </script>
+</script>
 </body>
 
 </html>

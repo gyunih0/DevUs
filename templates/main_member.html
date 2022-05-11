@@ -222,6 +222,7 @@
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
             {% set like = card["like"] %}
+            {% set project_name = card["project_name"] %}
             <li>
                 <div class="all">
                     <a href="/project/{{ num }}">
@@ -229,7 +230,11 @@
                     </a>
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
-                    <div class="ct">'
+
+
+                    <div class="ct">
+
+
                         {% if num in like_nums %}
                             <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i></button>
                             <p id="like_num">{{ like }}</p>
@@ -238,6 +243,7 @@
                             <button onclick="like_up({{ num }})" type="button"><i class="far fa-heart hart"></i></button>
                             <p id="like_num">{{ like }}</p>
                         {% endif %}
+
                     </div>
                 </div>
             </li>
@@ -259,8 +265,8 @@
                 </div>
                 <div class="box">
                     <div class="name">
-                        <p>이름</p>
-                        <input type="text" id="user_name" name="user_name">
+                        <p>프로젝트 이름</p>
+                        <input type="text" id="project_name" name="project_name">
                     </div>
                     <div class="pr">
                         <p>프로젝트 이미지</p>

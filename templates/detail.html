@@ -35,7 +35,7 @@
     </div>
 
     {% if exist_token %}
-    <button id="myBtn">프로젝트 생성</button>
+
     </li><img src="../static/image/user.jpeg" alt=""></li>
     {% else %}
     <li>
@@ -46,11 +46,17 @@
 </div>
 <div class="sec">
     <h3>{{ cards["tech"] }}</h3>
-    <h2>{{ cards["user_name"] }}님의 프로젝트</h2>
-    <div class="user">
+    <h2>{{ cards["project_name"] }}</h2>
+    <div class="user" id="user">
         <img src="../static/image/user.jpeg" alt="">
+
+{#        {% 여기 좋아요한건지 판별 %}#}
         <p>{{ cards["user_name"] }}</p>
-        <i class="fas fa-heart hart"></i>
+        {% if status == "unlike"  %}
+        <button style="background-color:transparent; border: 0px;" onclick="like_up({{ cards["num"] }})" type="button"><i class="far fa-heart hart"></i></button>
+        {% else %}
+        <button style="background-color:transparent; border: 0px;" onclick="like_down({{ cards["num"] }})" type="button"><i class="fas fa-heart hart"></i></button>
+        {% endif %}
         <p>{{ cards["like"] }}</p>
     </div>
     <hr>
@@ -63,6 +69,51 @@
     $(document).ready(function () {
 
     })
+
+
+    function like_up(num) {
+        let num_give = num
+
+        $.ajax({
+            type: "POST",
+            url: "/like",
+            data: {num_give: num_give},
+            success: function(response) {
+                $('#user').empty()
+                {#like갯수 update 해준다#}
+                let updated_like = response['like']
+                {#버튼을 빨간하트로 교체#}
+                let temp_html = `<img src="../static/image/user.jpeg" alt="">
+                                <p>{{ cards["user_name"] }}</p>
+                                <button style="background-color:transparent; border: 0px;" onclick="like_down({{ cards["num"] }})" type="button"><i class="fas fa-heart hart"></i></button>
+                                <p>${updated_like}</p>`
+                $('#user').append(temp_html)
+                window.location.reload()
+            }
+        });
+    }
+
+
+    function like_down(num) {
+        let num_give = num
+        $.ajax({
+            type: "POST",
+            url: "/like",
+            data: {num_give: num_give},
+            success: function(response) {
+                $('#user').empty()
+                {#like갯수 update 해준다#}
+                let updated_like = response['like']
+                {#버튼을 빈 하트로 교체#}
+                let temp_html = `<img src="../static/image/user.jpeg" alt="">
+                                <p>{{ cards["user_name"] }}</p>
+                                <button style="background-color:transparent; border: 0px;" onclick="like_up({{ cards["num"] }})" type="button"><i class="far fa-heart hart"></i></button>
+                                <p>${updated_like}</p>`
+                $('#user').append(temp_html)
+                window.location.reload()
+            }
+        });
+    }
 
 </script>
 </body>

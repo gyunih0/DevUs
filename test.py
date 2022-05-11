@@ -34,8 +34,8 @@ def add_like_list():
 
 
 def delete_like_list(user_id):
-    db.like.delete_one({'user_id': user_id})
+    db.like.delete({'user_id': user_id})
 
 
 # 여기서 db조작
-add_project()
+

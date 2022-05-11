@@ -45,6 +45,10 @@ def project_detail(num_give):
 
     # 토큰 가져오기
     token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.user.find_one({"id": payload['id']})
+
+    like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
 
     # 토큰 null 판별을 위한 트리거
     exist_token = False
@@ -53,7 +57,23 @@ def project_detail(num_give):
     if token_receive is not None:
         exist_token = True
 
-    return render_template("detail.html", cards=detail_cards, exist_token=exist_token)
+    if not like_nums:  # 첫 회원가임 또는 like 없는상태
+        status = "unlike"
+        return render_template('detail.html', exist_token=exist_token, cards=detail_cards, status=status)
+    else:
+        like_nums = like_nums[0]['like_list']
+
+        if int(num_give) not in like_nums:
+            status = "unlike"
+            print(status)
+            return render_template('detail.html', exist_token=exist_token, cards=detail_cards, status=status)
+        else:
+            status = "like"
+            print(status)
+            return render_template('detail.html', exist_token=exist_token, cards=detail_cards, status=status)
+
+
+    # return render_template("detail.html", cards=detail_cards, exist_token=exist_token)
 
 
 '''
@@ -123,7 +143,12 @@ def main_category():
 
 @app.route("/main", methods=["POST"])
 def project_post():
-    user_name_receive = request.form.get('user_name', False)  # 폼에서 전송하는 데이터 받는 형식
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.user.find_one({"id": payload['id']})
+
+    user_name_receive = user_info['name']
+    project_name_receive = request.form.get('project_name', False)  # 폼에서 전송하는 데이터 받는 형식
     tech_receive = request.form.get('tech', False)
     description_receive = request.form.get('description', False)
     project_img_receive = 'none'
@@ -142,6 +167,7 @@ def project_post():
 
     doc = {
         'num': num,  # 게시물 번호
+        'project_name': project_name_receive,
         'user_name': user_name_receive,  # 게시물 작성자 이름
         'project_img': '../static/test_image/' + project_img_receive,  # 게시물 이미지
         'tech': tech_receive,  # 기술(fn,bn,ful)

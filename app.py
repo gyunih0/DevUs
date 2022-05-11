@@ -71,7 +71,7 @@ def main_member():
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 없습니다."))
+        return redirect(url_for("main", msg="로그인 정보가 없습니다."))
 
 
 @app.route('/main/category')
@@ -101,6 +101,8 @@ def project_post():
     project_list = list(db.project.find({}, {'_id': False}))
 
     num = len(project_list) + 1  # 게시물 번호 부여
+    while (len(list(db.project.find({'num': num}))) != 0):  # 게시물 확인
+        num += 1
 
     doc = {
         'num': num,  # 게시물 번호

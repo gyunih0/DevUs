@@ -376,177 +376,217 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
 }
-
 .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    position: relative;
-    border: 1px solid #888;
-    border-radius: 15px;
-    width: 800px;
-    height: 800px;
+  background-color: #fefefe;
+  margin: auto;
+  position: relative;
+  border: 1px solid #888;
+  border-radius: 15px;
+  width: 800px;
+  height: 800px;
 }
-
-.modal-content .create .title {
-    width: 100%;
-    height: 50px;
-    text-align: center;
-    position: relative;
-    background-color: #F3D0FF;
-    border-radius: 15px 15px 0 0;
-    color: #fff;
+.modal-content .create .title{
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  position: relative;
+  background-color: #F3D0FF;
+  border-radius: 15px 15px 0 0;
+  color: #fff;
 }
-
 .modal-content .create .title h1 {
-    left: 320px;
-    position: absolute;
-    top: 15px;
-    font-size: 20px;
+  left: 320px;
+  position: absolute;
+  top: 15px;
+  font-size: 20px;
 
 }
-
 .modal-content .create .box {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
 
 }
-
-.modal-content .create .box .name > p {
-    font-size: 20px;
-    position: absolute;
-    top: 78px;
-    font-size: 20px;
+.modal-content .create .box .name > p{
+  font-size: 20px;
+  position: absolute;
+  top: 78px;
+  font-size: 20px;
 }
-
 .modal-content .create .box .name > input {
-    position: absolute;
-    top: 117px;
-    width: 400px;
-    height: 35px;
-    border: 1px solid #DBDBDB;
-    border-radius: 8px;
+  position: absolute;
+  top: 117px;
+  width: 400px;
+  height: 35px;
+  border: 1px solid #DBDBDB;
+  border-radius: 8px;
 }
-
 .modal-content .create .box .pr > p {
-    position: absolute;
-    top: 192px;
-    font-size: 20px;
+  position: absolute;
+  top: 192px;
+  font-size: 20px;
 }
-
 .modal-content .create .box .pr > input {
-    position: absolute;
-    top: 231px;
-    width: 287px;
-    height: 35px;
-    border: 1px solid #DBDBDB;
-    border-radius: 8px;
+  position: absolute;
+  top: 231px;
+  width: 287px;
+  height: 35px;
+  border: 1px solid #DBDBDB;
+  border-radius: 8px;
 }
-
 .modal-content .create .box .pr > button {
-    position: absolute;
-    top: 231px;
-    left: 507px;
-    width: 92px;
-    height: 35px;
-    background-color: #E0A2F5;
-    border: 1px solid #E0A2F5;
-    border-radius: 8px;
-    color: #fff;
+  position: absolute;
+  top: 231px;
+  left: 507px;
+  width: 92px;
+  height: 35px;
+  background-color: #E0A2F5;
+  border: 1px solid #E0A2F5;
+  border-radius: 8px;
+  color: #fff;
 }
-
 .modal-content .create .box .pr > button:hover {
-    background-color: #E0A2F5;
-    border: 1px solid #000;
+  background-color: #E0A2F5;
+  border: 1px solid #000;
 }
-
 .modal-content .create .box .dev {
-    position: absolute;
-    top: 306px;
+  position: absolute;
+  top: 306px;
+  width: 500px;
+  height: 50px;
+}
+.modal-content .create .box .dev > label > div {
+  display: inline-block;
+  width: 100px;
+  height: 35px;
+  margin-right: 48px;
+  background-color: #E0A2F5;
+  border: 1px solid #E0A2F5;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+.modal-content .create .box .dev >label:hover{
+  cursor:pointer;
+}
+.modal-content .create .box .dev >input[type=radio]:checked + label > div{
+  background-color: #3dd715;
+  border: 1px solid #000;
+}
+.modal-content .create .box .dev >input[type=radio] {
+  display: none;
 }
 
-.modal-content .create .box .dev > button {
-    width: 100px;
-    height: 35px;
-    margin-right: 48px;
-    background-color: #E0A2F5;
-    border: 1px solid #E0A2F5;
-    border-radius: 8px;
-    color: #fff;
-}
 
-.modal-content .create .box .dev > button:hover {
-    background-color: #E0A2F5;
-    border: 1px solid #000;
+.modal-content .create .box .content > p{
+  position: absolute;
+  top: 380px;
+  font-size: 20px;
 }
-
-.modal-content .create .box .content > p {
-    position: absolute;
-    top: 380px;
-    font-size: 20px;
-}
-
 .modal-content .create .box .content > textarea {
-    position: absolute;
-    top: 417px;
-    width: 400px;
-    height: 274px;
-    border: 1px solid #DBDBDB;
-    border-radius: 8px;
+  position: absolute;
+  top: 417px;
+  width: 400px;
+  height: 274px;
+  border: 1px solid #DBDBDB;
+  border-radius: 8px;
 }
-
 .modal-content .create .box > button {
-    position: absolute;
-    top: 727px;
-    width: 400px;
-    height: 35px;
-    background-color: #E0A2F5;
-    border: 1px solid #E0A2F5;
-    border-radius: 8px;
-    color: #fff;
+  position: absolute;
+  top: 727px;
+  width: 400px;
+  height: 35px;
+  background-color: #E0A2F5;
+  border: 1px solid #E0A2F5;
+  border-radius: 8px;
+  color: #fff;
 
 }
-
 .modal-content .create .box > button:hover {
-    background-color: #E0A2F5;
-    border: 1px solid #000;
+  background-color: #E0A2F5;
+  border: 1px solid #000;
+}
+
+.filebox{
+  position: absolute;
+  top: 231px;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+.filebox label{
+  display: inline-block;
+  padding: 0.5em .75em;
+  color: white;
+  font-weight: bold;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #E0A2F5;
+  cursor: pointer;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: 0.25em;
+}
+
+
+.filebox .upload-name{
+    display: inline-block;
+    padding: 0.5em 0.75em;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: 0.25em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .close {
-    color: #fff;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    padding: 10px;
+  color: #fff;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 10px;
 }
-
 .close:hover,
 .close:focus {
-    color: rgb(180, 11, 11);
-    text-decoration: none;
-    cursor: pointer;
-
+  color: rgb(180, 11, 11);
+  text-decoration: none;
+  cursor: pointer;
 }
-
-button#myBtn {
-    width: 80px;
-    height: 30px;
-    background: #E0A2F5;
-    border: 1px solid #E0A2F5;
-    margin-left: 10px;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
+button#myBtn{
+  width: 80px;
+  height: 30px;
+  background: #E0A2F5;
+  border: 1px solid #E0A2F5;
+  margin-left: 10px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
 }

@@ -10,12 +10,12 @@ db = client.devus
 # 여기서 데이터 조작
 def add_project():
     doc = {
-        'num': 2,
+        'num': 100,
         'user_name': "master",
-        'project_img': "./test_image/testimg2.png",
+        'project_img': "../static/test_image/cat.jpg",
         'tech': "Front-end",
         'description': "이것은 test num 2 입니다.",
-        'like': 100
+        'like': 120
     }
 
     db.project.insert_one(doc)
@@ -38,4 +38,4 @@ def delete_like_list(user_id):
 
 
 # 여기서 db조작
-add_like_list()
+add_project()

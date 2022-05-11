@@ -119,6 +119,59 @@ border:1px solid #558ab7 !important;
   text-decoration: underline;
   
 }
+
+.bd .swiper2 {
+  margin-top: 60px;
+  width: 1200px;
+  height: 310px;
+}
+.bd .swiper2 .all {
+  width: 280px;
+  height: 290px;
+  border: 1px solid #DBDBDB;
+}
+.bd .swiper2 .all a img {
+  width: 280px;
+  height: 150px;
+  border-radius: 15px 15px 0px 0px;
+}
+.bd .swiper2 .all p{
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-bottom: 48px;
+  font-size: 12px;
+  font-family: 'Noto Sans';
+  line-height: 16.34px;
+}
+.bd .swiper2 .all h3{
+  margin-left: 15px;
+  margin-bottom: 20px;
+}
+.bd .swiper2 .all .ct {
+  display: flex;
+}
+.bd .swiper2 .all .ct button {
+  width: 18px;
+  height: 16px;
+  border: 0 solid #fff;
+  background-color: #fff;
+}
+.bd .swiper2 .all .ct button .hart {
+  width: 18px;
+  height: 15.75px;
+  margin-left: 15px;
+}
+.bd .swiper2 .all .ct p{
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-bottom: 48px;
+  font-size: 12px;
+  font-family: 'Noto Sans';
+  line-height: 16.34px;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets {
+  bottom: -5px;
+}
 .bd ul {
   display: flex;
   flex-direction: row;
@@ -140,6 +193,7 @@ border:1px solid #558ab7 !important;
   width: 280px;
   height: 290px;
 }
+
 .bd ul li .all a img {
   width: 280px;
   height: 150px;
@@ -173,6 +227,9 @@ border:1px solid #558ab7 !important;
   height: 15.75px;
   margin-left: 15px;
   
+}
+.bd ul li .all > .ct button .hart:hover{
+  border: 1px solid #000;
 }
 .bd ul li .all > .ct p {
   margin-top: 2px;

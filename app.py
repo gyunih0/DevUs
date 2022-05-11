@@ -38,9 +38,8 @@ def category():
 
 
 @app.route('/project/<num_give>')
-def project_detail():
-    num_receive = request.args['num_give']
-    detail_cards = db.project.find_one({'num': num_receive}, {'_id': False})
+def project_detail(num_give):
+    detail_cards = db.project.find_one({'num': num_give}, {'_id': False})
 
     return render_template("detail.html", cards=detail_cards)
 

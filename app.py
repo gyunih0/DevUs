@@ -34,9 +34,7 @@ def main():
 @app.route('/category')
 def category():
     tech_receive = request.args['tech_give']
-    print(tech_receive)
     tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))
-    print(tech_cards)
     return jsonify({'cards_category': tech_cards})
 
 

@@ -104,6 +104,7 @@
     </div>
     <ul class="category">
         {% for card in all_cards %}
+            {% set num = card["num"] %}
             {% set project_img = card["project_img"] %}
             {% set tech = card["tech"] %}
             {% set user_name = card["user_name"] %}
@@ -112,7 +113,7 @@
             {% if tech == 'Front-end' %}
             <li>
                 <div class="all">
-                    <a href="/project">
+                    <a href="/project/{{ num }}">
                         <img src="{{ project_img }}" alt="">
                     </a>
                     <p>{{ tech }}</p>
@@ -259,6 +260,7 @@
                 let rows = response['cards_category']
 
                 for (let i = 0; i < rows.length; i++) {
+                    let num = rows[i]['num']
                     let user_name = rows[i]['user_name']
                     let project_img = rows[i]['project_img']
                     let tech = rows[i]['tech']
@@ -267,7 +269,7 @@
 
                     let temp_html = `<li>
                                         <div class="all">
-                                            <a href="/project">
+                                            <a href="/project/${num}">
                                                 <img src="${project_img}" alt="">
                                             </a>
                                             <p>${tech}</p>

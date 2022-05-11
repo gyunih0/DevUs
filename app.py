@@ -66,12 +66,14 @@ def project_post():
     user_name_receive = request.form.get('user_name', False)    #폼에서 전송하는 데이터 받는 형식
     tech_receive = request.form.get('tech', False)
     description_receive = request.form.get('description', False)
+    project_img_receive = 'none'
 
-    if request.method == 'POST':
-        file = request.files['project_file']          #html에서 파일 가져오기
+    file = request.files['project_file']  # html에서 파일 가져오기
+
+    if file.name != 'project_file':
         file.save(secure_filename(file.filename))     #파일저장
+        project_img_receive = file.filename
 
-    project_img_receive = file.filename
     project_list = list(db.project.find({}, {'_id': False}))
 
     num = len(project_list) + 1  #게시물 번호 부여

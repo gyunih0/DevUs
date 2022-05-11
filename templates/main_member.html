@@ -134,9 +134,9 @@
     <ul>
 
         {% for like_card in like_cards %}
-            {% set project_img = card["project_img"] %}
-            {% set tech = card["tech"] %}
-            {% set user_name = card["user_name"] %}
+            {% set project_img = like_card["project_img"] %}
+            {% set tech = like_card["tech"] %}
+            {% set user_name = like_card["user_name"] %}
             <li>
                 <div class="all">
                     <img src="{{ project_img }}" alt="">

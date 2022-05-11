@@ -58,21 +58,23 @@ def main_member():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
-
         all_cards = list(db.project.find({}, {'_id': False}))
+        fe_cards = list(db.project.find({'tech': 'Front-end'}, {'_id': False}))
+
         like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
-        print(like_nums)
+        print("like", like_nums)
 
         like_cards = []
-        for like_num in like_nums:
+        for like_num in like_nums[0]['like_list']:
             like_card = db.project.find_one({'num': like_num}, {'_id': False})
             like_cards.append(like_card)
 
-        return render_template('main_member.html', user_info=user_info, all_cards=all_cards, like_cards=like_cards)
+        return render_template('main_member.html', user_info=user_info, all_cards=all_cards, like_cards=like_cards, fe_cards=fe_cards)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 없습니다."))
+
 
 @app.route("/main", methods=["POST"])
 def project_post():

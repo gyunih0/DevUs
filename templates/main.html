@@ -58,28 +58,44 @@
         <div class="swiper-pagination"></div>
     </div>
     <h1>All</h1>
-    <ul>
-        {% for card in all_cards %}
-            {% set num = card["num"] %}
-            {% set project_img = card["project_img"] %}
-            {% set tech = card["tech"] %}
-            {% set user_name = card["user_name"] %}
-            {% set like = card["like"] %}
-            <li>
-                <div class="all">
-                    <a href="/project/{{ num }}">
-                        <img src="{{ project_img }}" alt="">
-                    </a>
-                    <p>{{ tech }}</p>
-                    <h3>{{ user_name }}님의 프로젝트</h3>
-                    <div class="ct">
-                        <button type="button"><i class="fas fa-heart hart"></i></button>
-                        <p>{{ like }}</p>
+    <div class="swiper-container swiper2">
+        <div class="swiper-wrapper">
+
+            {% for card in all_cards %}
+                {% set num = card["num"] %}
+                {% set project_img = card["project_img"] %}
+                {% set tech = card["tech"] %}
+                {% set user_name = card["user_name"] %}
+                {% set like = card["like"] %}
+
+                <div class="swiper-slide">
+                    <div class="all">
+                        <a href="/project/{{ num }}">
+                            <img src="{{ project_img }}" alt="">
+                        </a>
+                        <p>{{ tech }}</p>
+                        <h3>{{ user_name }}님의 프로젝트</h3>
+                        <div class="ct">
+                            <button type="button"><i class="fas fa-heart hart"></i></button>
+                            <p>{{ like }}</p>
+                        </div>
                     </div>
                 </div>
-            </li>
-        {% endfor %}
-    </ul>
+
+            {% endfor %}
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+        <div class="swiper-button-prev"></div>
+        <!-- 이전 버튼 -->
+
+        <!-- 페이징 -->
+        <div class="swiper-pagination"></div>
+
+    </div>
+
+
     <div class="sec">
       <a href="javascript:void(0);" onclick="category('Front-end')" class="fe">Front-end</a>
       <a href="javascript:void(0);" onclick="category('Back-end')" class="ba">Back-end</a>
@@ -164,6 +180,22 @@
 
 </div>
 <script>
+
+    new Swiper(".swiper2 ", {
+        pagination: {
+          // 페이징 설정
+          el: ".swiper-pagination",
+          clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+        },
+        slidesPerView: 4,
+        navigation: {
+          // 네비게이션 설정
+          nextEl: ".swiper-button-next", // 다음 버튼 클래스명
+          prevEl: ".swiper-button-prev", // 이번 버튼 클래스명
+        },
+      });
+
+
     $(document).ready(function () {
         var fileTarge = $('.filebox .upload-hidden');
         fileTarge.on('change', function () {

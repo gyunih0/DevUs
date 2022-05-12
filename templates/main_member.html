@@ -74,11 +74,11 @@
     // category
     // category click
     function main_category(tech_give) {
-       $.ajax({
+        $.ajax({
             type: "GET",
             url: "main/category",
-            data: {tech_give: tech_give },
-            success: function(response) {
+            data: {tech_give: tech_give},
+            success: function (response) {
                 $('.category').empty()
                 let rows = response['cards_category']
 
@@ -93,7 +93,7 @@
                     let like_btn = ""
                     let count_func = ""
                     if (status === 'like') {
-                         //빨간 버튼
+                        //빨간 버튼
                         let temp_html = `<li>
                                         <div class="all">
                                             <a href="/project/${num}">
@@ -111,8 +111,7 @@
 
                         $('.category').append(temp_html);
 
-                    }
-                    else {
+                    } else {
 
                         let temp_html = `<li>
                                         <div class="all">
@@ -120,7 +119,8 @@
                                                 <img src="${project_img}" alt="">
                                             </a>
                                             <p>${tech}</p>
-                                            <h3>${user_name}님의 프로젝트</h3>
+                                            <h2>${project_name}</h2>
+                                            <h3>${user_name}</h3>
                                             <div class="ct" id="like-count">
                                                 <button onclick="like_up(${num})" type="button"><i class="far fa-heart hart"></i></button>
                                                 <p id="like_num">${like}</p>
@@ -130,14 +130,10 @@
 
                         $('.category').append(temp_html);
                     }
-
-
                 }
-
-
-                }
-            });
-        }
+            }
+        });
+    }
 
 
     </script>

@@ -95,6 +95,10 @@ body {
   color: red;
 }
 .bd .join-box ul li #help-password {
+  color: black;
+}
+
+.bd .join-box ul li #help-password2 {
   color: red;
 }
 .bd .join-box ul li p{

@@ -203,20 +203,6 @@
                         </div>
                     </div>
 
-                    <div class="swiper-slide">
-                    <div class="all">
-                        <a href="/project/{{ num }}">
-                            <img src="{{ project_img }}" alt="">
-                        </a>
-                        <p>{{ tech }}</p>
-                        <h2>{{ project_name }}</h2>
-                        <h3>{{ user_name }}</h3>
-                        <div class="ct">
-                            <button type="button"><i class="fas fa-heart hart"></i></button>
-                            <p>{{ like }}</p>
-                        </div>
-                    </div>
-                </div>
                 {% endfor %}
             </div>
             <div class="swiper-button-next"></div>
@@ -225,7 +211,7 @@
             <!-- 이전 버튼 -->
 
             <!-- 페이징 -->
-            <div class="swiper-pagination"></div>
+            <div class="swiper2-pagination"></div>
         {% else %}
             <h3>관심있는 게시물이 없습니다.</h3>
         {% endif %}
@@ -336,7 +322,7 @@
     new Swiper(".swiper2 ", {
         pagination: {
           // 페이징 설정
-          el: ".swiper-pagination",
+          el: ".swiper2-pagination",
           clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
         },
         slidesPerView: 4,

@@ -128,8 +128,9 @@ def main_member():
                 like_card = db.project.find_one({'num': like_num}, {'_id': False})
                 like_cards.append(like_card)
 
-            # sorted(like_cards, key=lambda like: like_cards[])
-            return render_template('main_member.html', user_info=user_info, like_cards=like_cards,
+            sorted_like_cards = sorted(like_cards, key=lambda like_card: like_card['like'], reverse=True)
+
+            return render_template('main_member.html', user_info=user_info, like_cards=sorted_like_cards,
                                    fe_cards=fe_cards, like_nums=like_nums)
 
     except jwt.ExpiredSignatureError:  # exp 만료

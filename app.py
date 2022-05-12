@@ -72,8 +72,7 @@ def project_detail(num_give):
         exist_token = True
 
     try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
+        user_info = get_user_info(token_receive)
 
         like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
 
@@ -274,7 +273,7 @@ def sign_in():
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-        print(result)
+
         return jsonify({'result': 'success', 'token': token})
 
     else:
@@ -293,7 +292,7 @@ def like():
     user_info = get_user_info(token_receive)
 
     id_receive = user_info['id']  # 회원 아이디
-    print(id_receive)
+
     num_receive = int(request.form['num_give'])  # 게시물 num
     # like_receive = int(request.form['like_give'])  # 기존 좋아요 개수
 
@@ -301,7 +300,7 @@ def like():
     like_receive = project['like']
 
     like_list = list(db.like.find({'user_id': id_receive}, {'_id': False}))
-    print(like_list)
+
     like_nums = []
     if not like_list:  # db.like에 정보가 없다면 (첫 좋아요 누르기) 새로운 db 생성
         doc = {
@@ -321,7 +320,7 @@ def like():
         # db.project.update-> like += 1, db.like.update  / result: like up /
     else:
         like_nums = like_list[0]['like_list']  # [1,2,3]
-        print(like_nums)
+
         # 좋아요가 안된 게시물이라면
         if num_receive not in like_nums:
 
@@ -345,7 +344,6 @@ def like():
             db.project.update_one({'num': num_receive}, {'$set': {'like': like_receive - 1}})
 
             return jsonify({'result': 'success', 'like': like_receive - 1})
-
 
 
 if __name__ == '__main__':

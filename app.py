@@ -45,10 +45,6 @@ def project_detail(num_give):
 
     # 토큰 가져오기
     token_receive = request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    user_info = db.user.find_one({"id": payload['id']})
-
-    like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
 
     # 토큰 null 판별을 위한 트리거
     exist_token = False
@@ -57,23 +53,32 @@ def project_detail(num_give):
     if token_receive is not None:
         exist_token = True
 
-    if not like_nums:  # 첫 회원가임 또는 like 없는상태
-        status = "unlike"
-        return render_template('detail.html', exist_token=exist_token, cards=detail_cards, status=status)
-    else:
-        like_nums = like_nums[0]['like_list']
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
 
-        if int(num_give) not in like_nums:
+        like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
+
+        if not like_nums:  # 첫 회원가임 또는 like 없는상태
             status = "unlike"
-            print(status)
             return render_template('detail.html', exist_token=exist_token, cards=detail_cards, status=status)
         else:
-            status = "like"
-            print(status)
-            return render_template('detail.html', exist_token=exist_token, cards=detail_cards, status=status)
+            like_nums = like_nums[0]['like_list']
 
+            if int(num_give) not in like_nums:
+                status = "unlike"
+                print(status)
+                return render_template('detail.html', exist_token=exist_token, cards=detail_cards, status=status)
+            else:
+                status = "like"
+                print(status)
+                return render_template('detail.html', exist_token=exist_token, cards=detail_cards, status=status)
 
-    # return render_template("detail.html", cards=detail_cards, exist_token=exist_token)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+
+        return render_template("detail.html", cards=detail_cards, exist_token=exist_token)
 
 
 '''

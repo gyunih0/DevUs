@@ -292,17 +292,15 @@ def like():
     like_list = list(db.like.find({'user_id': id_receive}, {'_id': False}))
     print(like_list)
     like_nums = []
-    if not like_list:
+    if not like_list:  # db.like에 정보가 없다면 (첫 좋아요 누르기) 새로운 db 생성
         doc = {
             'user_id': id_receive,
             'like_list': []
         }
-
         db.like.insert_one(doc)
 
         # db.like에 게시물 num 등록한다.
         like_nums.append(num_receive)
-        print(like_nums)
         db.like.update_one({'user_id': id_receive}, {'$set': {'like_list': like_nums}})
 
         # db.project에서 게시물의 like를 올려준다
@@ -318,16 +316,15 @@ def like():
 
             # db.like에 게시물 num 등록한다.
             like_nums.append(num_receive)
-            print(like_nums)
+
             db.like.update_one({'user_id': id_receive}, {'$set': {'like_list': like_nums}})
 
             # db.project에서 게시물의 like를 올려준다
             db.project.update_one({'num': num_receive}, {'$set': {'like': like_receive + 1}})
 
             return jsonify({'result': 'success', 'like': like_receive + 1})
-            # db.project.update-> like += 1, db.like.update  / result: like up /
 
-        # 좋아요가 되있는 게시물이라면
+        # 좋아요가 되어있는 게시물이라면
         else:
             # db.like에 게시물 num를 제외시킨다.
             like_nums.remove(num_receive)

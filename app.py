@@ -121,6 +121,7 @@ def main_member():
                 like_card = db.project.find_one({'num': like_num}, {'_id': False})
                 like_cards.append(like_card)
 
+            # sorted(like_cards, key=lambda like: like_cards[])
             return render_template('main_member.html', user_info=user_info, like_cards=like_cards,
                                    fe_cards=fe_cards, like_nums=like_nums)
 
@@ -212,8 +213,9 @@ def join_save():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
-    print(id_receive, pw_hash, name_receive)
+
     db.user.insert_one({'id': id_receive, 'pw': pw_hash, 'name': name_receive})
+    print('join|id: {}, name: {}, pw: {}'.format(id_receive, name_receive, pw_hash))
 
     return jsonify({'result': 'success'})
 
@@ -243,11 +245,9 @@ def login():
 def sign_in():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
-
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
     result = db.user.find_one({'id': id_receive, 'pw': pw_hash})
-    print(result)
 
     if result is not None:
         payload = {
@@ -255,8 +255,8 @@ def sign_in():
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-
-        return jsonify({'result': 'success', 'token': token})  # deconde('utf-8') 오류
+        print(result)
+        return jsonify({'result': 'success', 'token': token})
 
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
@@ -329,7 +329,7 @@ def like():
             db.project.update_one({'num': num_receive}, {'$set': {'like': like_receive - 1}})
 
             return jsonify({'result': 'success', 'like': like_receive - 1})
-            # db.project.update-> like -= 1, db.like.update / result: like down /
+
 
 
 if __name__ == '__main__':

@@ -37,8 +37,8 @@ def main():
     all_cards = list(db.project.find({}, {'_id': False}))
 
     # 좋아요 많은 순으로 정렬
-    top3_like_cards = sorted(all_cards[0:3], key=lambda like_card: like_card['like'], reverse=True)
-    print(len(top3_like_cards))
+    top3_like_cards = sorted(all_cards, key=lambda all_card: all_card['like'], reverse=True)
+    top3_like_cards = top3_like_cards[:3]
 
     # 카테고리 선택 전 Front-end card 가져오기
     fe_cards = list(db.project.find({'tech': 'Front-end'}, {'_id': False}))
@@ -106,6 +106,8 @@ def project_detail(num_give):
 # 메인 페이지
 @app.route('/main')
 def main_member():
+
+
     # 쿠키(토큰) 요청
     token_receive = request.cookies.get('mytoken')
 
@@ -115,6 +117,11 @@ def main_member():
 
         # project 전체
         all_cards = list(db.project.find({}, {'_id': False}))
+
+        # 좋아요 많은 순으로 정렬
+        top3_like_cards = sorted(all_cards, key=lambda all_card: all_card['like'], reverse=True)
+        top3_like_cards = top3_like_cards[:3]
+
         # default category = frontend
         fe_cards = list(db.project.find({'tech': 'Front-end'}, {'_id': False}))
 
@@ -123,7 +130,7 @@ def main_member():
 
         if not like_nums:  # 좋아요 누른 프로젝트가 없다면
             return render_template('main_member.html', user_info=user_info, all_cards=all_cards,
-                                   fe_cards=fe_cards)
+                                   fe_cards=fe_cards, top3_like_cards=top3_like_cards)
 
         else:  # 좋아요 누른 프로젝트가 있다면
             like_nums = like_nums[0]['like_list']  # like_nums = [num,num,..]
@@ -135,7 +142,7 @@ def main_member():
             sorted_like_cards = sorted(like_cards, key=lambda like_card: like_card['like'], reverse=True)
 
             return render_template('main_member.html', user_info=user_info, like_cards=sorted_like_cards,
-                                   fe_cards=fe_cards, like_nums=like_nums)
+                                   fe_cards=fe_cards, like_nums=like_nums, top3_like_cards=top3_like_cards)
 
     except jwt.ExpiredSignatureError:  # exp 만료
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))

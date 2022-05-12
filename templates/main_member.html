@@ -183,6 +183,7 @@
                     {% set tech = like_card["tech"] %}
                     {% set user_name = like_card["user_name"] %}
                     {% set like = like_card["like"] %}
+                    {% set project_name = like_card["project_name"] %}
 
                     <div class="swiper-slide">
                         <div class="all">
@@ -190,7 +191,8 @@
                                 <img src="{{ project_img }}" alt="">
                             </a>
                             <p>{{ tech }}</p>
-                            <h3>{{ user_name }}님의 프로젝트</h3>
+                            <h2>{{ project_name }}</h2>
+                            <h3>{{ user_name }}</h3>
                             <div class="ct">
                                 <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i>
                                 </button>
@@ -198,6 +200,21 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="swiper-slide">
+                    <div class="all">
+                        <a href="/project/{{ num }}">
+                            <img src="{{ project_img }}" alt="">
+                        </a>
+                        <p>{{ tech }}</p>
+                        <h2>{{ project_name }}</h2>
+                        <h3>{{ user_name }}</h3>
+                        <div class="ct">
+                            <button type="button"><i class="fas fa-heart hart"></i></button>
+                            <p>{{ like }}</p>
+                        </div>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
             <div class="swiper-button-next"></div>
@@ -230,7 +247,8 @@
                         <img src="{{ project_img }}" alt="">
                     </a>
                     <p>{{ tech }}</p>
-                    <h3>{{ user_name }}님의 프로젝트</h3>
+                    <h2>{{ project_name }}</h2>
+                    <h3>{{ user_name }}</h3>
 
                     <div class="ct">
                         {% if num in like_nums %}

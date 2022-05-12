@@ -585,6 +585,14 @@ button#myBtn{
  .swiper2 .swiper-pagination1 {
   bottom: -30px;
 }
+
+ .swiper2 > h3 {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 150px;
+    opacity: 0.5;
+}
+
 .swiper-button-next {
 
     margin-right: 0px;
@@ -605,3 +613,4 @@ button.detail-heart-btn {
     background-color: transparent;
 
 }
+

@@ -17,6 +17,13 @@ client = MongoClient('mongodb+srv://test:sparta@cluster0.7y6m3.mongodb.net/myFir
                      tlsCAFile=ca)
 db = client.devus
 
+
+def get_user_info(token_receive):
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.user.find_one({"id": payload['id']})
+    return user_info
+
+
 '''
 메인페이지 API
 '''
@@ -59,7 +66,7 @@ def project_detail(num_give):
 
         like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
 
-        if not like_nums:  # 첫 회원가임 또는 like 없는상태
+        if not like_nums:  # 첫 회원가입 또는 like 없는상태
             status = "unlike"
             return render_template('detail.html', exist_token=exist_token, cards=detail_cards, status=status)
         else:
@@ -82,75 +89,77 @@ def project_detail(num_give):
 
 
 '''
-로그인 후 메인
+회원 API
 '''
 
-
+# 메인 페이지
 @app.route('/main')
 def main_member():
+    # 쿠키(토큰) 요청
     token_receive = request.cookies.get('mytoken')
 
     try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
+        # 토큰 decoding -> user_info
+        user_info = get_user_info(token_receive)
+
+        # project 전체
         all_cards = list(db.project.find({}, {'_id': False}))
+        # default category = frontend
         fe_cards = list(db.project.find({'tech': 'Front-end'}, {'_id': False}))
 
+        # 회원의 좋아요 list = [{user_id: user_id, like_list:[num, num, ...] }]
         like_nums = list(db.like.find({'user_id': user_info['id']}, {'_id': False}))
-        print("like", like_nums)
 
-        if not like_nums:  # 첫 회원가임 또는 like 없는상태
+        if not like_nums:  # 좋아요 누른 프로젝트가 없다면
             return render_template('main_member.html', user_info=user_info, all_cards=all_cards,
-                                   fe_cards=fe_cards, like_nums=like_nums)
-        else:
-            like_nums = like_nums[0]['like_list']
-            like_cards = []
+                                   fe_cards=fe_cards)
+
+        else:  # 좋아요 누른 프로젝트가 있다면
+            like_nums = like_nums[0]['like_list']  # like_nums = [num,num,..]
+            like_cards = []  # 좋아요 누른 프로젝트들의 list
             for like_num in like_nums:
                 like_card = db.project.find_one({'num': like_num}, {'_id': False})
                 like_cards.append(like_card)
 
-            return render_template('main_member.html', user_info=user_info, all_cards=all_cards, like_cards=like_cards,
+            return render_template('main_member.html', user_info=user_info, like_cards=like_cards,
                                    fe_cards=fe_cards, like_nums=like_nums)
-    except jwt.ExpiredSignatureError:
+
+    except jwt.ExpiredSignatureError:  # exp 만료
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
+    except jwt.exceptions.DecodeError:  # 토큰 없음
         return redirect(url_for("main", msg="로그인 정보가 없습니다."))
 
-
+# 메인 하단 카테고리별 분류
 @app.route('/main/category')
 def main_category():
     # get cookie -> userid
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    user_info = db.user.find_one({"id": payload['id']})
 
     tech_receive = request.args['tech_give']
-    id_receive = user_info['id']
-    tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))
-    print(tech_cards)
-    like_cards = list(db.like.find({'user_id': id_receive}, {'_id': False}))
-    if not like_cards:
+    id_receive = payload['id']
+    tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))  # 선택한 카테고리의 프로젝트들
+    like_cards = list(db.like.find({'user_id': id_receive}, {'_id': False}))  # 좋아요 누른 프로젝트 num의 list
+
+    if not like_cards:  # 좋아요 누른 프로젝트가 없다면
         for tech_card in tech_cards:
             tech_card['status'] = 'unlike'
-    else:
-        like_nums = like_cards[0]['like_list']
-        print(like_nums)
-
+    else:  # 좋아요 누른 프로젝트가 있다면
+        like_nums = like_cards[0]['like_list']  # like_nums = [num, num, ..]
         for tech_card in tech_cards:
             if tech_card['num'] in like_nums:
                 tech_card['status'] = 'like'
             else:
                 tech_card['status'] = 'unlike'
 
-    print(tech_cards)
     return jsonify({'cards_category': tech_cards})
 
 
 @app.route("/main", methods=["POST"])
 def project_post():
+    # 토큰 decoding -> user_info
     token_receive = request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    user_info = db.user.find_one({"id": payload['id']})
+    user_info = get_user_info(token_receive)
 
     user_name_receive = user_info['name']
     project_name_receive = request.form.get('project_name', False)  # 폼에서 전송하는 데이터 받는 형식
@@ -172,7 +181,7 @@ def project_post():
 
     doc = {
         'num': num,  # 게시물 번호
-        'project_name': project_name_receive,
+        'project_name': project_name_receive,  # 프로젝트 이름
         'user_name': user_name_receive,  # 게시물 작성자 이름
         'project_img': '../static/test_image/' + project_img_receive,  # 게시물 이미지
         'tech': tech_receive,  # 기술(fn,bn,ful)
@@ -262,8 +271,7 @@ def sign_in():
 @app.route('/like', methods=['POST'])
 def like():
     token_receive = request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    user_info = db.user.find_one({"id": payload['id']})
+    user_info = get_user_info(token_receive)
 
     id_receive = user_info['id']  # 회원 아이디
     print(id_receive)

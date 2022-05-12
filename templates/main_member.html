@@ -174,8 +174,9 @@
     <h1>{{ user_info['name'] }}님이 관심있는 프로젝트</h1>
 
     <div class="swiper-container swiper2">
-        <div class="swiper-wrapper">
-            {% if like_cards %}
+        {% if like_cards %}
+            <div class="swiper-wrapper">
+
                 {% for like_card in like_cards %}
                     {% set num = like_card["num"] %}
                     {% set project_img = like_card["project_img"] %}
@@ -191,24 +192,24 @@
                             <p>{{ tech }}</p>
                             <h3>{{ user_name }}님의 프로젝트</h3>
                             <div class="ct">
-                                <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i></button>
+                                <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i>
+                                </button>
                                 <p id="like_num">{{ like }}</p>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
-            {% else %}
-                <h3>관심있는 게시물이 없습니다.</h3>
-            {% endif %}
-        </div>
-        <div class="swiper-button-next"></div>
-        <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-        <div class="swiper-button-prev"></div>
-        <!-- 이전 버튼 -->
+            </div>
+            <div class="swiper-button-next"></div>
+            <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+            <div class="swiper-button-prev"></div>
+            <!-- 이전 버튼 -->
 
-        <!-- 페이징 -->
-        <div class="swiper-pagination"></div>
-
+            <!-- 페이징 -->
+            <div class="swiper-pagination"></div>
+        {% else %}
+            <h3>관심있는 게시물이 없습니다.</h3>
+        {% endif %}
     </div>
     <div class="sec">
         <a href="javascript:void(0);" onclick="main_category('Front-end')" class="fe">Front-end</a>
@@ -231,10 +232,7 @@
                     <p>{{ tech }}</p>
                     <h3>{{ user_name }}님의 프로젝트</h3>
 
-
                     <div class="ct">
-
-
                         {% if num in like_nums %}
                             <button onclick="like_down({{ num }})" type="button"><i class="fas fa-heart hart"></i></button>
                             <p id="like_num">{{ like }}</p>
@@ -243,7 +241,6 @@
                             <button onclick="like_up({{ num }})" type="button"><i class="far fa-heart hart"></i></button>
                             <p id="like_num">{{ like }}</p>
                         {% endif %}
-
                     </div>
                 </div>
             </li>

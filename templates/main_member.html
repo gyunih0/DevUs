@@ -89,6 +89,7 @@
                     let tech = rows[i]['tech']
                     let like = rows[i]['like']
                     let status = rows[i]['status']
+                    let project_name = rows[i]['project_name']
                     let like_btn = ""
                     let count_func = ""
                     if (status === 'like') {
@@ -99,7 +100,8 @@
                                                 <img src="${project_img}" alt="">
                                             </a>
                                             <p>${tech}</p>
-                                            <h3>${user_name}님의 프로젝트</h3>
+                                            <h2>${project_name}</h2>
+                                            <h3>${user_name}</h3>
                                             <div class="ct" id="like-count">
                                                 <button onclick="like_down(${num})" type="button"><i class="fas fa-heart hart"></i></button>
                                                 <p id="like_num">${like}</p>

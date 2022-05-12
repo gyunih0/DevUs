@@ -5,6 +5,8 @@ import jwt
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
+from operator import itemgetter
+
 app = Flask(__name__)
 
 from pymongo import MongoClient
@@ -31,16 +33,21 @@ def get_user_info(token_receive):
 
 @app.route('/')
 def main():
-    top3_cards = list(db.project.find({}))
-    print(top3_cards)
+    # 모든 card 가져오기
     all_cards = list(db.project.find({}, {'_id': False}))
+
+    # 카테고리 선택 전 Front-end card 가져오기
     fe_cards = list(db.project.find({'tech': 'Front-end'}, {'_id': False}))
+
     return render_template("main.html", all_cards=all_cards, fe_cards=fe_cards)
 
 
 @app.route('/category')
 def category():
+    # 카테고리 선택 시 카테고리명 받아오기
     tech_receive = request.args['tech_give']
+
+    # 카테고리 별 card 가져오기
     tech_cards = list(db.project.find({'tech': tech_receive}, {'_id': False}))
     return jsonify({'cards_category': tech_cards})
 

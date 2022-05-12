@@ -36,10 +36,14 @@ def main():
     # 모든 card 가져오기
     all_cards = list(db.project.find({}, {'_id': False}))
 
+    # 좋아요 많은 순으로 정렬
+    top3_like_cards = sorted(all_cards[0:3], key=lambda like_card: like_card['like'], reverse=True)
+    print(len(top3_like_cards))
+
     # 카테고리 선택 전 Front-end card 가져오기
     fe_cards = list(db.project.find({'tech': 'Front-end'}, {'_id': False}))
 
-    return render_template("main.html", all_cards=all_cards, fe_cards=fe_cards)
+    return render_template("main.html", all_cards=all_cards, fe_cards=fe_cards, top3_like_cards=top3_like_cards)
 
 
 @app.route('/category')

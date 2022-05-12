@@ -255,6 +255,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
     border-radius: 15px 15px 0px 0px;
     position: relative;
     left: -1px;
+    top: -1px;
 }
 
 .bd .category li .all button {
@@ -675,3 +676,113 @@ button.detail-heart-btn {
     background-color: transparent;
 
 }
+
+
+/* banner top3 like cards css start */
+.banner-box {
+    height: 458px;
+}
+
+.banner-title {
+    height: 15%;
+    font-size: 24px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+.banner {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner li {
+    margin-right: 30px;
+}
+
+.banner li:nth-child(4n) {
+    margin-right: 0px;
+}
+
+.banner li .all {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #DBDBDB;
+    border-radius: 15px 15px 0px 0px;
+    width: 240px;
+    height: 290px;
+}
+
+.banner li .all a img {
+    width: 240px;
+    height: 150px;
+    border-radius: 15px 15px 0px 0px;
+    position: relative;
+    left: -1px;
+    top: -1px;
+}
+
+.banner li .all button {
+    width: 18px;
+    height: 16px;
+    border: 0 solid #fff;
+    background-color: #fff;
+}
+
+.banner li .all > .ct p {
+    margin-top: 1px;
+    margin-left: 25px;
+    font-size: 15px;
+}
+
+.banner li .all p {
+    margin-top: 15px;
+    margin-left: 16px;
+    font-size: 12px;
+    font-family: 'Noto Sans';
+    line-height: 16.34px;
+}
+
+.banner li .all h2 {
+    margin: 10px 0 0 15px;
+    font-size: 1rem;
+}
+
+.banner li .all h3 {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.banner li .all .ct p {
+    margin-top: 0px;
+    margin-left: 25px;
+    font-size: 15px;
+}
+
+.banner li .all .ct .hart {
+    width: 18px;
+    height: 15.75px;
+    margin-left: 15px;
+    color: #E0A2F5;
+}
+
+.banner li .all .ct {
+    display: flex;
+    justify-content: end;
+    margin: 25px 15px 0 0;
+}
+
+.banner li .all .ct p {
+    margin-top: 0px;
+    margin-left: 25px;
+    font-size: 15px;
+}
+
+
+/* banner top3 like cards css end */

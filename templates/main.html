@@ -47,7 +47,34 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="../static/image/banner.png"></div>
             <div class="swiper-slide">
+                <div class="banner-box">
+                    <div class="banner-title">Like Top3 Project</div>
+                    <div class="banner">
+                        {% for card in top3_like_cards %}
+                            {% set num = card["num"] %}
+                            {% set project_img = card["project_img"] %}
+                            {% set tech = card["tech"] %}
+                            {% set user_name = card["user_name"] %}
+                            {% set like = card["like"] %}
+                            {% set project_name =  card["project_name"] %}
 
+                            <li>
+                                <div class="all">
+                                    <a href="/project/{{ num }}">
+                                        <img src="{{ project_img }}" alt="">
+                                    </a>
+                                    <p>{{ tech }}</p>
+                                    <h2>{{ project_name }}</h2>
+                                    <h3>{{ user_name }}</h3>
+                                    <div class="ct">
+                                        <button type="button"><i class="fas fa-heart hart"></i></button>
+                                        <p>{{ like }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
 
